@@ -1,39 +1,37 @@
 :root {
-    // * COLORS *
-    --white: #ffffff;
-    --black: #000000;
-    --grey: #F7F7F7;
-    --red: #FF001B;
-    --accent: #FF6B08;
-    --accent--active: #0a8817;
+  // * COLORS *
+  --white: #ffffff;
+  --black: #000000;
+  --grey: #f7f7f7;
+  --red: #ff001b;
+  --accent: #ff6b08;
 
-    // text
-    --text-color--dark: #000000;
-    --text-color--bright: #ffffff;
-    --text-color--accent: #FF6B08;
-    --secondary-text-color: #545454;
+  // text
+  --text-color--dark: #000000;
+  --text-color--bright: #ffffff;
+  --text-color--accent: #ff6b08;
+  --secondary-text-color: #545454;
 
-    --text-color--address: #d6936d;
+  --text-color--address: #d6936d;
 
-    // background
-    --bg-color--bright: #E5E5E5;
+  // background
+  --bg-color--bright: #e5e5e5;
 
-    --bg-color--backdrop: rgba(0, 0, 0, 0.2);
+  --bg-color--backdrop: rgba(0, 0, 0, 0.2);
 
+  // * BREAKPOINTS *
+  --bp-mobile: 320px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
 
-    // * BREAKPOINTS *
-    --bp-mobile: 320px;
-    --bp-tablet: 768px;
-    --bp-desktop: 1280px;
+  // * SHADOWS *
+  /* btn light */
+  // background: #C4C4C4;
+  // box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
 
-    // * SHADOWS *
-    /* btn light */
-    // background: #C4C4C4;
-    // box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-
-    // * TRANSITIONS *
-    //duration and function
-    --transition-dur-and-func: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  // * TRANSITIONS *
+  //duration and function
+  --transition-dur-and-func: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // * FONT-FAMILIES *
