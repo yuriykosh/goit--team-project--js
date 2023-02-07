@@ -1,5 +1,35 @@
-<h2>HEADER HOME</h2>
-<ul>
-  <li><a href="/">HOME</a></li>
-  <li><a href="./my-library.html">MY LIBRARY</a></li>
-</ul>
+<header class="header">
+  <div class="container header__container" id="top">
+
+    <nav class="navigation">
+
+      <a class="logo">
+        <svg class="logo__icon" width="24" height="24">
+          <use href="./images/symbol.svg#film"></use>
+        </svg>
+        <span class="logo__name">Filmoteka</span>
+      </a>
+
+      <ul class="site-nav">
+        <li class="site-nav__item">
+          <a href="/" class="site-nav__link is-active">Home</a>
+        </li>
+        <li class="site-nav__item">
+          <a href="./my-library.html" class="site-nav__link">My library</a>
+        </li>
+      </ul>
+    </nav>
+    
+    <form class="form js-form">
+      <label class="form__label">
+        <input class="form__input" type="text" name="query" autofocus placeholder="Movie search">
+      </label>
+      <button type="submit" class="form__button">
+        <svg class="form__icon" width="12" height="12">
+          <use href="./images/symbol.svg#search"></use>
+        </svg>
+      </button>
+    </form>
+    
+  </div>
+</header>
