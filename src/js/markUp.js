@@ -6,20 +6,26 @@ export default function createMarkup(results, { data }) {
       const genresList = data.genres.filter((genre, index) => genre_ids.includes(genre.id))
       .map(item => item.name);
       const genres = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
+      const defaultImage = "/src/images/mobile-poster-filler.jpeg";
 
      return `
-     <li class="film__card">
-       <a>
-         <img class="film__poster" src=${posterLink} alt=${title} loading="lazy" />
-         <div class="film__info">
-           <p class="film__name">
-           ${title}
-             <span class="film__details">
-               ${genres} | ${release_year}
-             </span>
-           </p>
-         </div>
-       </a>
-     </li>`;
+     <li class="movies__item">
+        <div class="movies__wrapper">
+          <img
+            loading="lazy"
+            class="movies__poster"
+            src=${posterLink}
+            onerror=${defaultImage}
+            alt=${title}
+          />
+        </div>
+        <div class="movies__meta">
+          <h2 class="movies__title">${title}</h2>
+          <div class="movies__desc">
+            <span class="movies__desc-genres">${genres}</span>|
+            <span class="movies__desc-release-year">${release_year}</span>
+          </div>
+        </div>
+      </li>`;
      })
  }     
