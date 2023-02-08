@@ -1,0 +1,34 @@
+// * SECTION *
+.section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  
+    @media screen and (min-width: 780px) {
+      padding-top: 59px;
+      padding-bottom: 59px;
+    }
+    @media screen and (min-width: 1280px) {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+  }
+  
+  // * CONTAINER *
+  .container {
+    max-width: var(--bp-mobile);
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+  
+    @media screen and (min-width: 768px) {
+      max-width: var(--bp-tablet);
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  
+    @media screen and (min-width: 1280px) {
+      max-width: var(--bp-desktop);
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }

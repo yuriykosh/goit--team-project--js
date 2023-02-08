@@ -3,6 +3,7 @@
 @import './utils/visually-hidden';
 
 @import './base/common';
+@import './base/section';
 
 @import './layout/header';
 @import './layout/main';
@@ -11,3 +12,4 @@
 @import './components/backdrop';
 @import './components/modal--details';
 @import './components/modal--team';
+@import './components/spinner';
