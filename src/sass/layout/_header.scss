@@ -1,7 +1,7 @@
 // ___________header
 
 .header {
-    background-image: url(../images/header/bg-mobile.jpeg);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-mobile.jpeg);
     background-color: var(--black);
     background-repeat: no-repeat;
     background-position: center;
@@ -10,26 +10,60 @@
     @media screen and (min-device-paxel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
-        background-image: url(../images/header/bg-mobile@2x.jpeg);
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-mobile@2x.jpeg);
       }
   
     @media screen and (min-width: 768px) {
-      background-image: url(../images/header/bg-tablet.jpeg);
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-tablet.jpeg);
   
       @media screen and (min-device-paxel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
-        background-image: url(../images/header/bg-tablet@2x.jpeg);
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-tablet@2x.jpeg);
       }
     }
   
     @media screen and (min-width: 1280px) {
-      background-image: url(../images/header/bg-desktop.jpg);
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-desktop.jpg);
   
       @media screen and (min-device-paxel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
-        background-image: url(../images/header/bg-desktop@2x.jpeg);
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-desktop@2x.jpeg);
+      }
+    }
+  }
+
+  .header-library {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-mobile.jpeg);
+    background-color: var(--black);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  
+    @media screen and (min-device-paxel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-mobile@2x.jpeg);
+      }
+      
+    @media screen and (min-width: 768px) {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-tablet.jpeg);
+  
+      @media screen and (min-device-paxel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-tablet@2x.jpeg);
+      }
+    }
+  
+    @media screen and (min-width: 1280px) {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-desktop.jpeg);
+
+      @media screen and (min-device-paxel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/bg-desktop@2x.jpeg);
       }
     }
   }
@@ -45,6 +79,11 @@
     @media screen and (min-width: 1280px) {
       padding-bottom: 80px;
     }
+  }
+
+  .header__library__container {
+    padding-top: 40px;
+    padding-bottom: 62px;
   }
   
   .navigation {
@@ -136,6 +175,7 @@
     background-color: transparent;
     border: none;
     border-bottom: 0.5px solid var(--white);
+    color: var(--text-color--bright);
   
     &::placeholder {
       color: var(--text-color--bright);
@@ -161,5 +201,51 @@
     &:hover,
     &:focus {
       scale: 1.2;
+    }
+  }
+  
+  .header__list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    @media screen and (min-width: 768px) {
+      gap: 32px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      gap: 16px;
+    }
+  }
+
+  .header__button {
+    width: 129.53px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    border: 1px solid var(--white);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--text-color--bright);
+    @include font(12px, 500, 16px);
+    transition: border-color var(--transition-dur-and-func), background-color var(--transition-dur-and-func);
+
+    &:hover {
+      border-color: var(--accent);
+    }
+
+    &:hover {
+      background-color: var(--accent);
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 152px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      width: 148px;
+      padding-top: 13.36px;
+      padding-bottom: 11.45px;
     }
   }
