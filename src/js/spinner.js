@@ -1,5 +1,7 @@
 import { Spinner } from 'spin.js';
 
+const backdropEl = document.querySelector('.backdrop');
+
 const opts = {
   lines: 12, // The number of lines to draw
   length: 80, // The length of each line
@@ -26,4 +28,9 @@ const spinner = new Spinner(opts);
 
 export function spinnerStart() {
   spinner.spin(target);
+}
+
+export function spinnerStop() {
+  spinner.stop();
+  backdropEl.classList.add('is-hidden');
 }
