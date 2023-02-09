@@ -25,9 +25,39 @@ export default function createMarkup(results, { data }) {
           <div class="movies__desc">
             <span class="movies__desc-genres">${genres}</span>|
             <span class="movies__desc-release-year">${releaseYear}</span>
-            <span class="movies__vote visually-hidden">${voteAverage}</span>
+            <span class="movies__vote is-hidden">${voteAverage}</span>
           </div>
         </div>
       </li>`;
      })
  }     
+
+          // <picture>
+          //   <source
+          //     srcset="
+          //       ./images/main-home/poster-filler-desktop.jpeg    1x,
+          //       ./images/main-home/poster-filler-desktop@2x.jpeg 2x
+          //     "
+          //     media="(min-width: 1200px)"
+          //   />
+          //   <source
+          //     srcset="
+          //       ./images/main-home/poster-filler-tablet.jpeg    1x,
+          //       ./images/main-home/poster-filler-tablet@2x.jpeg 2x
+          //     "
+          //     media="(min-width: 768px)"
+          //   />
+          //   <source
+          //     srcset="
+          //       ./images/main-home/poster-filler-mob.jpeg    1x,
+          //       ./images/main-home/poster-filler-mob@2x.jpeg 2x
+          //     "
+          //     media="(min-width: 280px)"
+          //   />
+          //   <img
+          //     loading="lazy"
+          //     class="movies__poster"
+          //     src="./images/main-home/poster-filler-mob.jpeg"
+          //     alt="movies__poster"
+          //   />
+          // </picture>
