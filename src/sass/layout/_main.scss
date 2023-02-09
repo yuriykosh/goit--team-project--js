@@ -28,14 +28,12 @@
 .movies__poster {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top;
 
   transition: transform var(--transition-dur-and-func);
-}
 
-.movies__poster:hover {
-  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .movies__meta {
@@ -81,7 +79,7 @@
   }
 
   .movies__item {
-    width: 336px;
+    width: calc((768px - 3 * 32px) / 2);
     gap: 8px;
 
     .movies__wrapper {
@@ -95,17 +93,24 @@
     row-gap: 32px;
     column-gap: 16px;
   }
-
   .movies__item {
-    // width: 395px;
+    width: calc((1280px - 2 * 32px - 2 * 16px) / 3);
     gap: 12px;
-  }
-  .movies__wrapper {
-    height: 574px;
+
+    .movies__wrapper {
+      height: 574px;
+    }
   }
 
   .movies__meta {
-    font-size: 20px;
     line-height: 1.2;
+  }
+
+  .movies__title {
+    font-size: 20px;
+  }
+
+  .movies__desc {
+    font-size: 20px;
   }
 }
