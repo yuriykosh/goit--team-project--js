@@ -13,6 +13,11 @@ export const ApiService = {
         return axios.get(url);
     },
 
+    getTrendMovies() {
+        const url = `${this.BASE_URL}/trending/movie/day?api_key=${this.API_KEY}`;
+        return axios.get(url);
+    },
+
     getGenresList() {
         const url = `${this.BASE_URL}/genre/movie/list?api_key=${this.API_KEY}&language=en-US`;
         return axios.get(url);

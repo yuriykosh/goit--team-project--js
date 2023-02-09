@@ -1,6 +1,7 @@
 // ___________header
 
 .header {
+    height: 230px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-mobile.jpeg);
     background-color: var(--black);
     background-repeat: no-repeat;
@@ -14,6 +15,7 @@
       }
   
     @media screen and (min-width: 768px) {
+      height: 216px;
       background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-main/bg-tablet.jpeg);
   
       @media screen and (min-device-paxel-ratio: 2),
@@ -231,10 +233,12 @@
 
     &:hover {
       border-color: var(--accent);
+      cursor: pointer;
     }
 
     &:hover {
       background-color: var(--accent);
+      cursor: pointer;
     }
 
     @media screen and (min-width: 768px) {

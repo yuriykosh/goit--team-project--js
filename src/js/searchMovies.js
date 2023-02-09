@@ -1,8 +1,9 @@
 import { Notify } from "notiflix";
 import { ApiService } from './ApiServise';
 import createMarkup from './markup';
+import { spinnerStart, spinnerStop } from "./spinner";
 
-// const gallery = document.querySelector('.js-gallery');   //Когда появится разметка
+const gallery = document.querySelector('.movies');   
 const formEl = document.querySelector('.js-form');
 
 formEl.addEventListener('submit', onFormSubmit);
@@ -13,17 +14,20 @@ Notify.init({
     clickToClose: true,
 });
 
+fetchTrendMovies();
+spinnerStart();
+
 function onFormSubmit(e) {
     e.preventDefault();
-    // gallery.innerHTML = '';   //Когда появится разметка
+    gallery.innerHTML = ''; 
+    formEl.reset();
 
     if (ApiService.query === '') {
         return Notify.failure('Please insert the name of the movie.');
     }
     
     ApiService.resetPage();
-//     spinner.spin();
-//     body.appendChild(spinner.el);
+    spinnerStart();
     fetchMovies();
 }
 
@@ -40,7 +44,7 @@ async function fetchMovies() {
 
 
         if (results.length === 0) {
-//             spinner.stop();
+            spinnerStop()
             return Notify.failure('Sorry, there are no movies matching your search query. Please try again.');
         }
         
@@ -48,12 +52,35 @@ async function fetchMovies() {
             Notify.success(`Hooray! We found ${total_results} movies.`);
         }
 
-        const markUp = createMarkup(results, genresList);
-        // gallery.insertAdjacentHTML('beforeend', markUp.join(''));     //Когда появится разметка
-
-//         spinner.stop();
+        const markUp = createMarkup(results, genresList).join('');
+        gallery.innerHTML = markUp;  
+        spinnerStop()
 
     } catch (error) {
         console.log(error);
+        return Notify.failure('Something went wrong. Please try again later.');
+    }
+}
+
+async function fetchTrendMovies() {
+    try {
+        const response = await ApiService.getTrendMovies();
+        const genresList = await ApiService.getGenresList();
+        const { data } = response;
+        const { page, results,total_pages, total_results } = data;
+
+        if (results.length === 0) {
+            spinnerStop()
+            return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
+        }
+        
+        const markUp = createMarkup(results, genresList).join('');
+        gallery.innerHTML =  markUp;  
+        spinnerStop()
+    }
+    catch(error) {
+        spinnerStop();
+        console.log(error);
+        return Notify.failure('Something went wrong. Please try again later.');
     }
 }
