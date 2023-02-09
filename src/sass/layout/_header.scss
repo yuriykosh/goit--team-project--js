@@ -185,7 +185,9 @@
   
     &:focus,
     &:active {
-      outline-color: var(--accent);
+      outline: 1px solid var(--accent);
+      border-radius: 3px;
+      border: none;
     }
   }
   

@@ -6,7 +6,7 @@ import { spinnerStart, spinnerStop } from "./spinner";
 const gallery = document.querySelector('.movies');   
 const formEl = document.querySelector('.js-form');
 
-// findMovieTreiler(615777)
+
 
 formEl.addEventListener('submit', onFormSubmit);
 formEl.addEventListener('input', onFormInput);
@@ -23,13 +23,13 @@ spinnerStart();
 
 function onFormSubmit(e) {
     e.preventDefault();
-    gallery.innerHTML = ''; 
     formEl.reset();
 
     if (ApiService.query === '') {
         return Notify.failure('Please insert the name of the movie.');
     }
     
+    gallery.innerHTML = ''; 
     ApiService.resetPage();
     spinnerStart();
     fetchMovies();
@@ -89,25 +89,52 @@ async function fetchTrendMovies() {
     }
 }
 
-// async function findMovieTrailer(id) {
-//     try {
-//         const response = await ApiService.getMovieTreiler(id);
-//         const { data } = response;
 
-//         console.log(data.results);
 
-//         // if (results.length === 0) {
-//         //     spinnerStop()
-//         //     return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
-//         // }
+
+
+
+
+async function findMovieTrailer(id) {
+    try {
+        const response = await ApiService.getMovieTreiler(id);
+        const { data } = response;
+
+        console.log(data.results);
+
+        const videoKey = data.results.find(result => result.type === 'Trailer' && result.official).key;
+        console.log(videoKey);
+
+        const iFrame = `<iframe id="player" type="text/html" width="640" height="360"
+        src="http://www.youtube.com/embed/${videoKey}?enablejsapi=1&origin=http://example.com"
+        frameborder="0"></iframe>`
+
+        videoPlayer.innerHTML = iFrame;
+
+        // if (results.length === 0) {
+        //     spinnerStop()
+        //     return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
+        // }
         
-//         // const markUp = createMarkup(results, genresList).join('');
-//         // gallery.innerHTML =  markUp;  
-//         // spinnerStop()
-//     }
-//     catch(error) {
-//         spinnerStop();
-//         console.log(error);
-//         return Notify.failure('Something went wrong. Please try again later.');
-//     }
-// }
+        // const markUp = createMarkup(results, genresList).join('');
+        // gallery.innerHTML =  markUp;  
+        // spinnerStop()
+    }
+    catch(error) {
+        spinnerStop();
+        console.log(error);
+        return Notify.failure('Something went wrong. Please try again later.');
+    }
+}
+
+
+// findMovieTrailer(615777)
+
+// const videoPlayer = document.getElementById('ppp');
+// // console.log(videoPlayer);
+
+// const iFrame = `<iframe id="player" type="text/html" width="640" height="360"
+//   src="http://www.youtube.com/embed/QXhCu0o79kY?enablejsapi=1&origin=http://example.com"
+//   frameborder="0"></iframe>`
+
+//   videoPlayer.innerHTML = iFrame;
