@@ -14,6 +14,9 @@ Notify.init({
     clickToClose: true,
 });
 
+fetchTrendMovies();
+spinnerStart();
+
 function onFormSubmit(e) {
     e.preventDefault();
     gallery.innerHTML = ''; 
@@ -50,11 +53,33 @@ async function fetchMovies() {
         }
 
         const markUp = createMarkup(results, genresList).join('');
-        gallery.insertAdjacentHTML('beforeend', markUp);  // возможно перепишу на InnerHTML
-
+        gallery.innerHTML = markUp;  
         spinnerStop()
 
     } catch (error) {
+        console.log(error);
+        return Notify.failure('Something went wrong. Please try again later.');
+    }
+}
+
+async function fetchTrendMovies() {
+    try {
+        const response = await ApiService.getTrendMovies();
+        const genresList = await ApiService.getGenresList();
+        const { data } = response;
+        const { page, results,total_pages, total_results } = data;
+
+        if (results.length === 0) {
+            spinnerStop()
+            return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
+        }
+        
+        const markUp = createMarkup(results, genresList).join('');
+        gallery.innerHTML =  markUp;  
+        spinnerStop()
+    }
+    catch(error) {
+        spinnerStop();
         console.log(error);
         return Notify.failure('Something went wrong. Please try again later.');
     }
