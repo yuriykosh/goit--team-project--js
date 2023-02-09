@@ -9,12 +9,17 @@ export const ApiService = {
 
     getMoviesByName() {
         const url = `${this.BASE_URL}/search/movie?api_key=${this.API_KEY}&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
-        this.incrementPage();
+        // this.incrementPage();
         return axios.get(url);
     },
 
     getTrendMovies() {
-        const url = `${this.BASE_URL}/....../......?api_key=${this.API_KEY}&page=${this.page}&include_adult=false`;
+        const url = `${this.BASE_URL}/trending/movie/day?api_key=${this.API_KEY}`;
+        return axios.get(url);
+    },
+
+    getGenresList() {
+        const url = `${this.BASE_URL}/genre/movie/list?api_key=${this.API_KEY}&language=en-US`;
         return axios.get(url);
     },
 

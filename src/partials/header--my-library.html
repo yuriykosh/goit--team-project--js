@@ -1,5 +1,32 @@
-<h2>HEADER MY LIBRARY</h2>
-<ul>
-  <li><a href="./index.html">HOME</a></li>
-  <li><a href="/">MY LIBRARY</a></li>
+<!-- <h2>HEADER MY LIBRARY</h2> -->
+
+<header class="header-library">
+  <div class="container header__library__container" id="top">
+
+    <nav class="navigation">
+
+      <a class="logo" href="./index.html">
+        <svg class="logo__icon" width="24" height="24">
+          <use href="./images/symbol.svg#film"></use>
+        </svg>
+        <span class="logo__name">Filmoteka</span>
+      </a>
+
+      <ul class="site-nav">
+        <li class="site-nav__item">
+          <a href="./index.html" class="site-nav__link">Home</a>
+        </li>
+        <li class="site-nav__item">
+          <a href="./my-library.html" class="site-nav__link is-active">My library</a>
+        </li>
+      </ul>
+    </nav>
+    
+<ul class="header__list">
+  <li><button type="button" class="header__button">Watched</button></li>
+  <li><button type="button" class="header__button">Queue</button></li>
 </ul>
+
+    
+  </div>
+</header>
