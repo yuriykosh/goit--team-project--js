@@ -31,11 +31,7 @@ export function spinnerStart() {
   backdropEl.classList.remove('is-hidden');
 }
 
-spinnerStart();
-
 export function spinnerStop() {
   spinner.stop();
   backdropEl.classList.add('is-hidden');
 }
-
-spinnerStop();
