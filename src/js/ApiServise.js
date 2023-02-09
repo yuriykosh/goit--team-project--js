@@ -13,6 +13,11 @@ export const ApiService = {
         return axios.get(url);
     },
 
+    getMoviesById(id) {
+        const url = `${this.BASE_URL}/movie/${id}?api_key=${this.API_KEY}`;
+        return axios.get(url);
+    },
+
     getTrendMovies() {
         const url = `${this.BASE_URL}/trending/movie/day?api_key=${this.API_KEY}`;
         return axios.get(url);
@@ -20,6 +25,17 @@ export const ApiService = {
 
     getGenresList() {
         const url = `${this.BASE_URL}/genre/movie/list?api_key=${this.API_KEY}&language=en-US`;
+        return axios.get(url);
+    },
+
+    getMovieTreiler(id) {
+        // https://www.googleapis.com/youtube/v3/videos?part=snippet&id=xE_rMj35BIM&key=YOUR_KEY
+        const url = `${this.BASE_URL}/movie/${id}/videos?api_key=${this.API_KEY}`;
+        return axios.get(url);
+    },
+
+    getYoutubeVideo() {
+        const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=63dd6339ddd52d007c816067&key=[YOUR_API_KEY]`;
         return axios.get(url);
     },
 

@@ -28,10 +28,10 @@ const spinner = new Spinner(opts);
 
 export function spinnerStart() {
   spinner.spin(target);
-  backdropEl.classList.remove('is-hidden');
+  // backdropEl.classList.remove('is-hidden');
 }
 
 export function spinnerStop() {
   spinner.stop();
-  backdropEl.classList.add('is-hidden');
+  // backdropEl.classList.add('is-hidden');
 }
