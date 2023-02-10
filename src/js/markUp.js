@@ -4,7 +4,7 @@ export default function createMarkup(results, { data }) {
 
     return results.map(result => {
       const { genre_ids, poster_path, release_date, title, vote_average, id } = result;
-      const posterLink = `https://image.tmdb.org/t/p/w00/${poster_path}`;
+      const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
       const releaseYear = release_date.slice(0, 4);
       const genresList = data.genres.filter(genre => genre_ids.includes(genre.id))
       .map(item => item.name);

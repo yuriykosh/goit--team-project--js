@@ -158,12 +158,6 @@ async function findMovieTrailer(id) {
     ).key;
     console.log(videoKey);
 
-    const iFrame = `<iframe id="player" type="text/html" width="640" height="360"
-        src="http://www.youtube.com/embed/${videoKey}?enablejsapi=1&origin=http://example.com"
-        frameborder="0"></iframe>`;
-
-    videoPlayer.innerHTML = iFrame;
-
     // if (results.length === 0) {
     //     spinnerStop()
     //     return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
@@ -181,11 +175,27 @@ async function findMovieTrailer(id) {
 
 // findMovieTrailer(615777)
 
-// const videoPlayer = document.getElementById('ppp');
-// // console.log(videoPlayer);
+const videoPlayer = document.getElementById('pvideo-placeholder');
+console.log(videoPlayer);
 
 // const iFrame = `<iframe id="player" type="text/html" width="640" height="360"
 //   src="http://www.youtube.com/embed/QXhCu0o79kY?enablejsapi=1&origin=http://example.com"
 //   frameborder="0"></iframe>`
 
 //   videoPlayer.innerHTML = iFrame;
+
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('video-placeholder', {
+      width: 600,
+      height: 400,
+      videoId: 'Xa0Q0J5tOP0',
+      playerVars: {
+          color: 'white',
+          playlist: 'taJ60kskkns,FG0fTKAqZ5g'
+      },
+      events: {
+          onReady: initialize
+      }
+  });
+}
