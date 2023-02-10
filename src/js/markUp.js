@@ -1,6 +1,6 @@
 export default function createMarkup(results, { data }) {
 
-  const defaultImage = `./src/images/mobile-poster-filler.jpeg`; ///////////
+  const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
 
     return results.map(result => {
       const { genre_ids, poster_path, release_date, title, vote_average, id } = result;
@@ -14,7 +14,7 @@ export default function createMarkup(results, { data }) {
      return `
      <li class="movies__item" id=${id}>
         <div class="movies__wrapper">
-        <img onerror="this.onerror=null;this.src=${defaultImage};"
+        <img onerror="this.onerror=null;this.src='${defaultImage}';"
          alt="Titanic" src=${posterLink} class="movies__poster" loading="lazy">
         </div>
         <div class="movies__meta">

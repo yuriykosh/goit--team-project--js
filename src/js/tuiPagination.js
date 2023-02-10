@@ -3,7 +3,7 @@ import 'tui-pagination/dist/tui-pagination.css';
 
 const options = {
   totalItems: 0,
-  itemsPerPage: 10,
+  itemsPerPage: 20,
   visiblePages: 3,
   page: 1,
   centerAlign: false,
