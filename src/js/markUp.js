@@ -1,10 +1,10 @@
 export default function createMarkup(results, { data }) {
 
-  const defaultImage = `./src/images/mobile-poster-filler.jpeg`; ///////////
+  const defaultImage = `https://img.freepik.com/premium-vector/clapperboard-on-a-red-background-movie-poster-flat-vector-illustration_581871-483.jpg?w=1380`; ///////////
 
     return results.map(result => {
       const { genre_ids, poster_path, release_date, title, vote_average, id } = result;
-      const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+      const posterLink = `https://image.tmdb.org/t/p/w00/${poster_path}`;
       const releaseYear = release_date.slice(0, 4);
       const genresList = data.genres.filter(genre => genre_ids.includes(genre.id))
       .map(item => item.name);
@@ -14,7 +14,7 @@ export default function createMarkup(results, { data }) {
      return `
      <li class="movies__item" id=${id}>
         <div class="movies__wrapper">
-        <img onerror="this.onerror=null;this.src=${defaultImage};"
+        <img onerror="this.onerror=null;this.src='${defaultImage}';"
          alt="Titanic" src=${posterLink} class="movies__poster" loading="lazy">
         </div>
         <div class="movies__meta">

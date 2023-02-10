@@ -5,11 +5,9 @@ export const ApiService = {
     API_KEY: 'a3ea6037e929c907cd6335d101a9b094',
     BASE_URL: 'https://api.themoviedb.org/3',
     searchQuery: '',
-    page: 1,
 
-    getMoviesByName() {
-        const url = `${this.BASE_URL}/search/movie?api_key=${this.API_KEY}&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
-        // this.incrementPage();
+    getMoviesByName(page) {
+        const url = `${this.BASE_URL}/search/movie?api_key=${this.API_KEY}&query=${this.searchQuery}&page=${page}&include_adult=false`;
         return axios.get(url);
     },
 
@@ -18,8 +16,8 @@ export const ApiService = {
         return axios.get(url);
     },
 
-    getTrendMovies() {
-        const url = `${this.BASE_URL}/trending/movie/day?api_key=${this.API_KEY}`;
+    getTrendMovies(page) {
+        const url = `${this.BASE_URL}/trending/movie/day?api_key=${this.API_KEY}&page=${page}`;
         return axios.get(url);
     },
 
@@ -38,13 +36,23 @@ export const ApiService = {
         return axios.get(url);
     },
 
-    incrementPage() {
-        this.page += 1;
-    },
+//     createMovieList() {
+// const url = `https://api.themoviedb.org/3/list?api_key=${this.API_KEY}&session_id=1`
+// // {
+// //     "name": "This is my awesome test list.",
+// //     "description": "Just an awesome list dawg.",
+// //     "language": "en"
+// //   }
 
-    resetPage() {
-        this.page = 1;
-    },
+// axios.post(url, {
+//     "name": "This is my awesome test list.",
+//     "description": "Just an awesome list dawg.",
+//     "language": "en"
+//   })
+//   .then(response => console.log(response))
+//   .catch(error => console.log(error));
+// },
+    
 
     set query(newQuery) {
         this.searchQuery = newQuery;
