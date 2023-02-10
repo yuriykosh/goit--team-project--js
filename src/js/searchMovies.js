@@ -4,13 +4,17 @@ import createMarkup from './markUp';
 import { spinnerStart, spinnerStop } from './spinner';
 import { pagination } from './tuiPagination';
 import findMovieTrailer from './player';
+import { onScroll, onToTopBtn } from "./scroll-to-top";
 
 const gallery = document.querySelector('.movies');
 const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
+const toTopBtn = document.querySelector('.btn-to-top');
 
 formEl.addEventListener('submit', onFormSubmit);
+window.addEventListener('scroll', onScroll);
+toTopBtn.addEventListener('click', onToTopBtn);
 
 Notify.init({
   width: '400px',
@@ -145,4 +149,4 @@ async function loadMoreTrendingMovies(event) {
 
 
 
-findMovieTrailer(615777);
+// findMovieTrailer(615777);
