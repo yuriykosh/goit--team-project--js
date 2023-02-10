@@ -3,12 +3,12 @@ import { ApiService } from './ApiServise';
 import createMarkup from './markUp';
 import { spinnerStart, spinnerStop } from './spinner';
 import { pagination } from './tuiPagination';
+import findMovieTrailer from './player';
 
 const gallery = document.querySelector('.movies');
 const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
-const player = document.querySelector('.player');
 
 formEl.addEventListener('submit', onFormSubmit);
 
@@ -143,37 +143,6 @@ async function loadMoreTrendingMovies(event) {
   }
 }
 
-async function findMovieTrailer(id) {
-  try {
-    const response = await ApiService.getMovieTreiler(id);
-    const { data } = response;
-
-    console.log(data.results);
-
-    const videoKey = data.results.find(
-      result => result.type === 'Trailer' && result.official
-    ).key;
-    videoID = videoKey;
-    console.log(videoID);
-
-    random(videoID);
-
-  } catch (error) {
-    console.log(error);
-    return Notify.failure('Something went wrong. Please try again later.');
-  }
-}
-
-// findMovieTrailer(615777);
 
 
-
-
-
-function random (id) {
-
-const frame = `<iframe id="player" type="text/html" width="640" height="360"
-src="http://www.youtube.com/embed/${id}?enablejsapi=1&origin=http://example.com"frameborder="0"></iframe>`;
-player.innerHTML = frame;
-}
-random()
+findMovieTrailer(615777);
