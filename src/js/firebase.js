@@ -47,6 +47,7 @@ const onBtnLoginClick = async () => {
     );
     Notify.success(`You are logged in`);
     toggleModal();
+    formEl.reset();
     console.log(userCredential.user);
   } catch (err) {
     if (err.code == AuthErrorCodes.INVALID_PASSWORD) {
