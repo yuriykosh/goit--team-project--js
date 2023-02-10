@@ -15,7 +15,7 @@ export default function createMarkup(results, { data }) {
      <li class="movies__item" id=${id}>
         <div class="movies__wrapper">
         <img onerror="this.onerror=null;this.src='${defaultImage}';"
-         alt="Titanic" src=${posterLink} class="movies__poster" loading="lazy">
+         alt=${title} src=${posterLink} class="movies__poster" loading="lazy">
         </div>
         <div class="movies__meta">
           <h2 class="movies__title">${title}</h2>
