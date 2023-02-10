@@ -28,7 +28,7 @@ function clickList(event) {
   if (moviesCard) openModal();
 }
 
-function openModal(event) {
+function openModal() {
   modal.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
   modal.addEventListener('click', clickModal);
