@@ -17,10 +17,12 @@
     min-height: 550px;
     width: 704px;
     padding: 0;
+    margin-top: 0;
   }
 
   @media screen and (min-width: 1280px) {
     width: 806px;
+    min-height: 550px;
     padding: 40px 12px;
   }
 }
@@ -43,12 +45,12 @@
     display: flex;
     flex-direction: row;
     gap: 68px;
-
     padding: 40px 72px 40px 36px;
   }
 
   @media screen and (min-width: 1280px) {
     gap: 16px;
+    padding: 0;
   }
 }
 
@@ -61,7 +63,9 @@
   }
 
   @media screen and (min-width: 1280px) {
-    min-width: 375px;
+    flex-basis: 375px;
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 478px;
   }
 }
@@ -80,10 +84,11 @@
   border: none;
   cursor: pointer;
   transition: background-color var(--transition-dur-and-func);
-}
 
-.movie-modal__video-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .movie-modal__imgBox__img {
@@ -102,6 +107,11 @@
 
   @media screen and (min-width: 768px) {
     margin-top: 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 30px;
+    line-height: 1.16;
   }
 }
 
@@ -124,6 +134,10 @@
 .movie-modal__info__item__attribute {
   color: var(--light-grey-text-color);
   min-width: 108px;
+
+  @media screen and (min-width: 1280px) {
+    margin-right: 40px;
+  }
 }
 
 .movie-modal__info__item__value {
@@ -150,9 +164,6 @@
 
 .movie-modal__about {
   margin-bottom: 20px;
-
-  @media screen and (min-width: 768px) {
-  }
 }
 
 .movie-modal__about-title {
@@ -177,6 +188,10 @@
 .movie-modal__button {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (min-width: 1280px) {
+    justify-content: flex-start;
+  }
 }
 
 .movie-modal__button__item {
@@ -209,5 +224,14 @@
   @media screen and (min-width: 768px) {
     width: 125px;
     height: 44px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 136px;
+    margin-right: 15px;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
