@@ -11,10 +11,12 @@ const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
 const toTopBtn = document.querySelector('.btn-to-top');
+const playBtn = document.querySelector('.js-playBtn');
 
 formEl.addEventListener('submit', onFormSubmit);
 window.addEventListener('scroll', onScroll);
 toTopBtn.addEventListener('click', onToTopBtn);
+playBtn.addEventListener('click', onPlayTrailer);
 
 Notify.init({
   width: '400px',
@@ -147,6 +149,7 @@ async function loadMoreTrendingMovies(event) {
   }
 }
 
-
-
-// findMovieTrailer(615777);
+function onPlayTrailer(event) {
+  const moviesId = event.target.closest('[data-modal]').id;
+  findMovieTrailer(moviesId);
+}

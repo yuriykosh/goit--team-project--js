@@ -1,5 +1,7 @@
 <div class="backdrop is-hidden" data-modal>
+  
   <div class="movie-modal">
+    
     <button data-modal-close class="movie-modal__close-btn" type="button">
       <svg class="movie-modal__close-btn-icon" width="30" height="30">
         <use href="./images/symbol.svg#icon-close-btn-modal"></use>
@@ -7,11 +9,12 @@
     </button>
 
     <div class="movie-modal__imgBox">
-      <span class="movie-modal__video-btn">
+      <button class="movie-modal__video-btn js-playBtn">
+        <div class="player"></div>
         <svg class="movie-modal__play-btn" width="80" height="80">
           <use href="./images/symbol.svg#icon-play"></use>
         </svg>
-      </span>
+      </button>
       <img class="movie-modal__imgBox__img" src="https://www.themoviedb.org/t/p/w300/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
         alt="" />
     </div>

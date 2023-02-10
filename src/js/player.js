@@ -2,19 +2,19 @@ import { ApiService } from './ApiServise';
 import { Notify } from 'notiflix';
 
 const player = document.querySelector('.player');
+const modal = document.querySelector('[data-modal]');
+
+modal.addEventListener('click', onClose);
 
 export default async function findMovieTrailer(id) {
     try {
       const response = await ApiService.getMovieTreiler(id);
       const { data } = response;
   
-      console.log(data.results);
-  
       const videoKey = data.results.find(
         result => result.type === 'Trailer' && result.official
       ).key;
       videoID = videoKey;
-      console.log(videoID);
   
       createPlayer(videoID);
       
@@ -34,9 +34,14 @@ export default async function findMovieTrailer(id) {
 
   function onEscPress(e) {
     if (e.key !== 'Escape') {
-      console.log("esc");
       return
     }
     player.innerHTML = '';
     window.removeEventListener('keydown', onEscPress)
+  }
+
+  function onClose(e) {
+    if (e.target !== player) {
+      player.innerHTML = '';
+    }
   }

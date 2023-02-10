@@ -4,6 +4,7 @@ const movies = document.querySelector('.movies');
 
 movies.addEventListener('click', clickList);
 
+
 function clickModal(event) {
   console.log('test');
   if (
@@ -21,11 +22,14 @@ function clickModal(event) {
 function closeModal() {
   modal.classList.add('is-hidden');
   document.body.style.overflow = 'visible';
+  modal.removeAttribute("id")
 }
 
 function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
   if (moviesCard) openModal();
+  const id = moviesCard.id
+  modal.setAttribute("id", id)
 }
 
 function openModal() {
