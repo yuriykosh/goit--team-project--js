@@ -5,7 +5,6 @@ const movies = document.querySelector('.movies');
 movies.addEventListener('click', clickList);
 
 function clickModal(event) {
-  console.log('test');
   if (
     ((!event.target.closest('.movie-modal') ||
       event.target.closest('[data-modal-close]')) &&
@@ -13,6 +12,7 @@ function clickModal(event) {
     event.keyCode === 27
   ) {
     closeModal();
+
     document.removeEventListener('keydown', clickModal);
     modal.removeEventListener('click', clickModal);
   }
@@ -28,7 +28,7 @@ function clickList(event) {
   if (moviesCard) openModal();
 }
 
-function openModal(event) {
+function openModal() {
   modal.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
   modal.addEventListener('click', clickModal);
