@@ -1,0 +1,62 @@
+.movie-modal {
+    font-size: 12px;
+    @media screen and (min-width: 768px) {
+        display: flex;
+    }
+
+    &__imgBox {
+        margin-right: 15px;
+        &__img {
+            width: 120vh; // delete this in future
+        }
+    }
+    &__title {
+        text-transform: uppercase;
+        font-size: 20px;
+
+        @media screen and (min-width: 1024px) {
+            font-size: 30px;
+        }
+        &-about {
+            text-transform: uppercase;
+        }
+    }
+
+    &__info__item {
+        display: flex;
+        margin-bottom: 8px;
+        font-weight: 500;
+
+            &__attribute {
+                color: #8c8c8c;
+                min-width: 108px;
+            }
+            &__value {
+                
+
+                &__marker {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    border-radius: 5px;
+                    color: #fff;
+                    background-color: #ff6b08;
+                }
+            }
+    }
+
+    &__button__item {
+        text-transform: uppercase;
+        border-radius: 5px;
+        border: 1px solid #000;
+        background-color: #fff;
+        height: 44px;
+        transition: all .25s cubic-bezier(.4, 0, .2, 1);
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ff6b08;
+            color: #fff;
+            border: 1px solid #ff6b08;
+        }
+    }
+}
