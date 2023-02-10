@@ -1,6 +1,6 @@
 export default function createMarkup(results, { data }) {
 
-  const defaultImage = `https://img.freepik.com/premium-vector/clapperboard-on-a-red-background-movie-poster-flat-vector-illustration_581871-483.jpg?w=1380`; ///////////
+  const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
 
     return results.map(result => {
       const { genre_ids, poster_path, release_date, title, vote_average, id } = result;

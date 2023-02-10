@@ -8,6 +8,7 @@ const gallery = document.querySelector('.movies');
 const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
+const player = document.querySelector('.player');
 
 formEl.addEventListener('submit', onFormSubmit);
 
@@ -142,10 +143,6 @@ async function loadMoreTrendingMovies(event) {
   }
 }
 
-
-
-
-
 async function findMovieTrailer(id) {
   try {
     const response = await ApiService.getMovieTreiler(id);
@@ -156,46 +153,27 @@ async function findMovieTrailer(id) {
     const videoKey = data.results.find(
       result => result.type === 'Trailer' && result.official
     ).key;
-    console.log(videoKey);
+    videoID = videoKey;
+    console.log(videoID);
 
-    // if (results.length === 0) {
-    //     spinnerStop()
-    //     return Notify.failure('Trending movies are not available. Please insert the name of the movie.');
-    // }
+    random(videoID);
 
-    // const markUp = createMarkup(results, genresList).join('');
-    // gallery.innerHTML =  markUp;
-    // spinnerStop()
   } catch (error) {
-    spinnerStop();
     console.log(error);
     return Notify.failure('Something went wrong. Please try again later.');
   }
 }
 
-// findMovieTrailer(615777)
-
-const videoPlayer = document.getElementById('pvideo-placeholder');
-console.log(videoPlayer);
-
-// const iFrame = `<iframe id="player" type="text/html" width="640" height="360"
-//   src="http://www.youtube.com/embed/QXhCu0o79kY?enablejsapi=1&origin=http://example.com"
-//   frameborder="0"></iframe>`
-
-//   videoPlayer.innerHTML = iFrame;
+findMovieTrailer(615777);
 
 
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('video-placeholder', {
-      width: 600,
-      height: 400,
-      videoId: 'Xa0Q0J5tOP0',
-      playerVars: {
-          color: 'white',
-          playlist: 'taJ60kskkns,FG0fTKAqZ5g'
-      },
-      events: {
-          onReady: initialize
-      }
-  });
+
+
+
+function random (id) {
+
+const frame = `<iframe id="player" type="text/html" width="640" height="360"
+src="http://www.youtube.com/embed/${id}?enablejsapi=1&origin=http://example.com"frameborder="0"></iframe>`;
+player.innerHTML = frame;
 }
+random()
