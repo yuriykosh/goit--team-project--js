@@ -29,7 +29,6 @@ export const ApiService = {
     },
 
     getMovieTreiler(id) {
-        // https://www.googleapis.com/youtube/v3/videos?part=snippet&id=xE_rMj35BIM&key=YOUR_KEY
         const url = `${this.BASE_URL}/movie/${id}/videos?api_key=${this.API_KEY}`;
         return axios.get(url);
     },
