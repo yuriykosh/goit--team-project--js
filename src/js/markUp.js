@@ -1,5 +1,3 @@
-import { ApiService } from "./ApiServise";
-
 export default function createMarkup(results, { data }) {
 
   const defaultImage = `./src/images/mobile-poster-filler.jpeg`; ///////////
@@ -30,24 +28,3 @@ export default function createMarkup(results, { data }) {
       </li>`;
      })
  }     
-
-          // <picture>
-          //   <source
-          //     srcset=${posterLink}
-          //   />
-          //   <img
-          //     loading="lazy"
-          //     class="movies__poster"
-          //     src=${defaultImage}
-          //     alt=${title}
-          //   />
-          // </picture>
-
-// <img
-// loading="lazy"
-// class="movies__poster"
-// src=${defaultImage}
-// onerror=${defaultImage}
-// alt=${title}
-// />
-
