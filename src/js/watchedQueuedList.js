@@ -37,7 +37,7 @@ function onClick(event) {
   loadMoviesList(idList);
 }
 
-function loadMoviesList(list) {
+export default function loadMoviesList(list) {
   if (!list) {
       refs.movieList.innerHTML = `
       <li>
@@ -45,13 +45,17 @@ function loadMoviesList(list) {
       </li>`;
     return;
   }
-  for(let i = (currentPage - 1) * 20; i < currentPage * 20; i += 1) {
+  loadOnePage(currentPage);
+}   
+
+function loadOnePage(pageNumber) {
+  for(let i=(pageNumber - 1) * 20 ; i<pageNumber * 20; i+=1) {
     if (i === totalItems ) {
       return;
     }
-    findMovieById(list[i]);
+    findMovieById(idList[i]);
   }
-}   
+}
 
 async function findMovieById(id) {
   try {
@@ -61,6 +65,7 @@ async function findMovieById(id) {
 
     const galleryMarkup = createNewMarkup(data);
     refs.movieList.insertAdjacentHTML('beforeend', galleryMarkup);
+    refs.paginationBlock.classList.remove('is-hidden');
   }
   catch(error) {
       console.log(error);

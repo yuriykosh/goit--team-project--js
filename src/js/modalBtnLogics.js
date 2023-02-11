@@ -1,3 +1,5 @@
+// import loadMoviesList from "./watchedQueuedList";
+
 const onBtnClick = function (event, storageKey) {
     let text = event.target.textContent;
     const movieId = event.target.dataset.id;
@@ -17,6 +19,9 @@ const onBtnClick = function (event, storageKey) {
         queueMovie = queueMovie.filter((item) => item !== movieId)
         localStorage.setItem(storageKey, JSON.stringify(queueMovie));
     }
+
+    // let idList = JSON.parse(localStorage.getItem(storageKey));
+    // loadMoviesList(idList);
 }; 
 
 export default onBtnClick;
