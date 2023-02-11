@@ -4,13 +4,12 @@ const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-pro
 export function createMainMarkup(results, { data }) {
 
     return results.map(result => {
-      const { genre_ids, poster_path, release_date, title, vote_average, id } = result;
+      const { genre_ids, poster_path, release_date, title, id } = result;
       const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
       const releaseYear = release_date.slice(0, 4);
       const genresList = data.genres.filter(genre => genre_ids.includes(genre.id))
       .map(item => item.name);
       const genres = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
-      const voteAverage = vote_average.toFixed(1);
 
      return `
      <li class="movies__item" id=${id}>
@@ -23,7 +22,6 @@ export function createMainMarkup(results, { data }) {
           <div class="movies__desc">
             <span class="movies__desc-genres">${genres}</span>|
             <span class="movies__desc-release-year">${releaseYear}</span>
-            <span class="movies__vote is-hidden">${voteAverage}</span>
           </div>
         </div>
       </li>`;
