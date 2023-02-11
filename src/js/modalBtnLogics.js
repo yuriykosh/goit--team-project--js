@@ -1,29 +1,31 @@
 import { ApiService } from "./ApiServise";
 
-// const btnAddToWatched = document.querySelector('.btn_add_watched');
-// const btnAddToQueue = document.querySelector('.btn_add_queue');
 
- const onBtnClick = async function (event, storageKey) {
+
+ const onBtnClick = function (event, storageKey) {
     const movieId = event.target.dataset.id;
-    const response = await ApiService.getMoviesById(movieId);
+    console.log(movieId);
+    const response = ApiService.getMoviesById(movieId);
     const movieData = response.data;
     console.log(movieData);
     const arrMovie = [];
 
     let queueMovie = JSON.parse(localStorage.getItem(storageKey));
+    console.log(queueMovie);
+
     if(!queueMovie){
         queueMovie = [];
     }
 
-    const tempMovie = queueMovie.find((movie) => {
-        return movie.id == movieData.id;
+    const tempMovie = queueMovie.find((movieId) => {
+        return movieId;   ///тут меняем имя кнопки
     });
     console.log(tempMovie)
     if (tempMovie){
         return;
     };
     
-    queueMovie.push(movieData);
+    queueMovie.push(movieId);
     
     localStorage.setItem(storageKey, JSON.stringify(queueMovie));
 
