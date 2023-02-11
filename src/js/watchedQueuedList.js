@@ -1,5 +1,7 @@
 import { Notify } from 'notiflix';
 import { ApiService } from './ApiServise';
+// import empty from '../images/empty-list.gif';
+
 const STORAGE_KEY = 'movie';
 localStorage.setItem(STORAGE_KEY, 520);
 
@@ -9,12 +11,10 @@ const refs = {
     movieList: document.querySelector('.movies'), 
 }
 
-const userId = 5;
-
 refs.watched.addEventListener('click', onWatchedClick);
+refs.queued.addEventListener('click', onQueuedClick);
 
 function onWatchedClick(event) {
-   if (userId === 5) {
 clearMovieList();   
 const markUp = `<li class="movies__item">
         <div class="movies__wrapper">
@@ -29,8 +29,15 @@ const markUp = `<li class="movies__item">
           </div>
         </div>
       </li>`;
+
+      if (!arrMovie.length) {
+    refs.movies.innerHTML = `
+      <li>
+        <img src="${empty}" alt="The list is empty." />
+      </li>`;
+    return;
+  }
 refs.movieList.insertAdjacentHTML('beforeend', markUp);
-} 
 }
 
 export default function createMovieMarkup(results) {
@@ -85,6 +92,33 @@ async function watchedMovie(id) {
 }
  
  watchedMovie(505642)
+
+function onQueuedClick(event) {
+clearMovieList();   
+const markUp = `<li class="movies__item">
+        <div class="movies__wrapper">
+          <img loading="lazy" class="movies__poster" src="/mobile-poster-filler.68d38ad9.jpeg" alt="movies__poster">
+        </div>
+        <div class="movies__meta">
+          <h2 class="movies__title">Monster Hunter</h2>
+          <div class="movies__desc">
+            <span class="movies__desc-genres">Drama, Action</span>|
+            <span class="movies__desc-release-year">2020</span>
+            <span class="movies__vote">8.3</span>
+          </div>
+        </div>
+      </li>`;
+      
+      if (!queueMovie.length) {
+    refs.movies.innerHTML = `
+      <li>
+        <img src="${empty}" alt="The list is empty." />
+      </li>`;
+    return;
+  }
+refs.movieList.insertAdjacentHTML('beforeend', markUp);
+}
+
 
 function clearMovieList(){
    refs.movieList.innerHTML = ""; 
