@@ -22,6 +22,7 @@
 
     &:hover,
     :focus {
+        cursor: pointer;
        scale: 1.1;     
        opacity: 1;
     }
