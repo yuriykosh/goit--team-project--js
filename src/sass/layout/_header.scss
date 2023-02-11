@@ -2,9 +2,11 @@
 
 .header {
   height: 230px;
-  background-image: linear-gradient(to right,
+  background-image: linear-gradient(
+      to right,
       rgba(0, 0, 0, 0.56),
-      rgba(0, 0, 0, 0.56)),
+      rgba(0, 0, 0, 0.56)
+    ),
     url(../images/header-main/bg-mobile.jpeg);
   background-color: var(--black);
   background-repeat: no-repeat;
@@ -12,52 +14,64 @@
   background-size: cover;
 
   @media screen and (min-device-paxel-ratio: 2),
-  screen and (min-resolution: 192dpi),
-  screen and (min-resolution: 2dppx) {
-    background-image: linear-gradient(to right,
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-main/bg-mobile@2x.jpeg);
   }
 
   @media screen and (min-width: 768px) {
     height: 216px;
-    background-image: linear-gradient(to right,
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-main/bg-tablet.jpeg);
 
     @media screen and (min-device-paxel-ratio: 2),
-    screen and (min-resolution: 192dpi),
-    screen and (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right,
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header-main/bg-tablet@2x.jpeg);
     }
   }
 
   @media screen and (min-width: 1280px) {
-    background-image: linear-gradient(to right,
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-main/bg-desktop.jpg);
 
     @media screen and (min-device-paxel-ratio: 2),
-    screen and (min-resolution: 192dpi),
-    screen and (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right,
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header-main/bg-desktop@2x.jpeg);
     }
   }
 }
 
 .header-library {
-  background-image: linear-gradient(to right,
+  background-image: linear-gradient(
+      to right,
       rgba(0, 0, 0, 0.56),
-      rgba(0, 0, 0, 0.56)),
+      rgba(0, 0, 0, 0.56)
+    ),
     url(../images/header-library/bg-mobile.jpeg);
   background-color: var(--black);
   background-repeat: no-repeat;
@@ -65,42 +79,52 @@
   background-size: cover;
 
   @media screen and (min-device-paxel-ratio: 2),
-  screen and (min-resolution: 192dpi),
-  screen and (min-resolution: 2dppx) {
-    background-image: linear-gradient(to right,
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-library/bg-mobile@2x.jpeg);
   }
 
   @media screen and (min-width: 768px) {
-    background-image: linear-gradient(to right,
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-library/bg-tablet.jpeg);
 
     @media screen and (min-device-paxel-ratio: 2),
-    screen and (min-resolution: 192dpi),
-    screen and (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right,
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header-library/bg-tablet@2x.jpeg);
     }
   }
 
   @media screen and (min-width: 1280px) {
-    background-image: linear-gradient(to right,
+    background-image: linear-gradient(
+        to right,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header-library/bg-desktop.jpeg);
 
     @media screen and (min-device-paxel-ratio: 2),
-    screen and (min-resolution: 192dpi),
-    screen and (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right,
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header-library/bg-desktop@2x.jpeg);
     }
   }
@@ -178,6 +202,7 @@
   border: none;
   color: var(--text-color--bright);
   transition: color var(--transition-dur-and-func);
+  cursor: pointer;
 
   &:hover {
     color: var(--red);
