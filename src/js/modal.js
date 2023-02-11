@@ -1,4 +1,4 @@
-import { ApiService } from "./ApiServise";
+// import { ApiService } from "./ApiServise";
 
 const closeModalBtn = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
@@ -30,11 +30,11 @@ function closeModal() {
 
 function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
-  if (moviesCard){
+  if (moviesCard) {
     btnAddToWatched.setAttribute('data-id', moviesCard.id);
     btnAddToQueue.setAttribute('data-id', moviesCard.id);
     openModal();
-  };
+  }
 }
 
 function openModal() {
