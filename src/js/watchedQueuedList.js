@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix';
 import { ApiService } from './ApiServise';
-// import empty from '../images/empty-list.gif';
+import empty from '../images/empty-list.gif';
 
 const STORAGE_KEY = 'movie';
 localStorage.setItem(STORAGE_KEY, 520);
