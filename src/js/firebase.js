@@ -100,5 +100,3 @@ function toggleModal() {
 
 openModalBtn.addEventListener('click', toggleModal);
 closeModalBtn.addEventListener('click', toggleModal);
-
-console.log(openModalBtn);

@@ -15,7 +15,10 @@ const wrapper = document.querySelector('.movie-modal');
 movies.addEventListener('click', clickList);
 
 function clickModal(event) {
-  console.log('test');
+  if (event.target.nodeName === 'BUTTON') {
+    return;
+  };
+
   if (
     ((!event.target.closest('.movie-modal') ||
       event.target.closest('[data-modal-close]')) &&
@@ -63,7 +66,6 @@ async function fetchModalMarkup(id) {
     spinnerStart();
     const response = await ApiService.getMoviesById(id);
     const { data } = response;
-    console.log(data);
 
     const markUp = createModalMarkup(data);
     wrapper.insertAdjacentHTML('beforeend', markUp);
