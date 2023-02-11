@@ -12,9 +12,7 @@ const currentPage = pagination.getCurrentPage();
 window.addEventListener('scroll', onScroll);
 toTopBtn.addEventListener('click', onToTopBtn);
 
-// Запрашиваем данные из localstorage для idList
-let idList = [696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 646389, 646389, 646389, 646389, 646389, 646389];  ///Пример
-
+let idList = JSON.parse(localStorage.getItem('WATCHED'));
 
 let totalItems = idList.length;
 

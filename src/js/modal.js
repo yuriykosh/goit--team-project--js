@@ -79,11 +79,14 @@ async function fetchModalMarkup(id) {
 
 function createModalMarkup(data) {
   const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;
-  let watchedText = '';
+  let watchedText = '2121,2121,3434,14';
   let queueText = '';
+  let watchedMovie = [];
+  let queueMovie = [];
+  // localStorage.setItem('WATCHED', JSON.stringify(watchedMovie))
+  // localStorage.setItem('WATCHED', JSON.stringify(4343))
 
-
-  const watchedMovie = JSON.parse(localStorage.getItem('WATCHED')) ? JSON.parse(localStorage.getItem('WATCHED')) : [];
+   watchedMovie = JSON.parse(localStorage.getItem('WATCHED')) ? JSON.parse(localStorage.getItem('WATCHED')) : [];
 
   if (!watchedMovie) {
     watchedText = 'add to watched';
@@ -91,7 +94,7 @@ function createModalMarkup(data) {
     watchedText = !watchedMovie.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
   }
 
-  const queueMovie = JSON.parse(localStorage.getItem('QUEUE')) ? JSON.parse(localStorage.getItem('QUEUE')) : [];
+   queueMovie = JSON.parse(localStorage.getItem('QUEUE')) ? JSON.parse(localStorage.getItem('QUEUE')) : [];
   if (!queueMovie) {
     queueText = 'add to watched';
   } else {
@@ -104,6 +107,7 @@ function createModalMarkup(data) {
   const genresItems = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
   const voteAverage = vote_average.toFixed(1);
   const popul = popularity.toFixed(1);
+  const originalTitle = original_title.toUpperCase();
 
   return `<div class="movie-modal__wrapper">
     <div class="movie-modal__imgBox">
@@ -131,7 +135,7 @@ function createModalMarkup(data) {
         </li>
         <li class="movie-modal__info__item">
           <p class="movie-modal__info__item__attribute">Original Title</p>
-          <p class="movie-modal__info__item__value">${original_title}</p>
+          <p class="movie-modal__info__item__value">${originalTitle}</p>
         </li>
         <li class="movie-modal__info__item">
           <p class="movie-modal__info__item__attribute">Genre</p>
