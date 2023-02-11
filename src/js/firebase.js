@@ -17,6 +17,8 @@ const btnSign = document.querySelector('#signup-btn');
 const btnLogin = document.querySelector('#login-btn');
 const emailEl = document.querySelector('#email');
 const passwordEl = document.querySelector('#password');
+const libraryEl = document.querySelector('#library');
+const loginEl = document.querySelector('#login');
 
 //options
 const firebaseApp = initializeApp({
@@ -46,6 +48,8 @@ const onBtnLoginClick = async () => {
     Notify.success(`You are logged in`);
     toggleModal();
     formEl.reset();
+    libraryEl.classList.remove('visually-hidden');
+    loginEl.classList.add('is-hidden');
     console.log(userCredential.user);
   } catch (err) {
     if (err.code == AuthErrorCodes.INVALID_PASSWORD) {
@@ -75,6 +79,8 @@ const onBtnSignClick = async () => {
     toggleModal();
     Notify.success(`You are successfully signed in`);
     formEl.reset();
+    libraryEl.classList.remove('visually-hidden');
+    loginEl.classList.add('is-hidden');
     console.log(userCredential.user);
   } catch (err) {
     if (err.code == AuthErrorCodes.INVALID_PASSWORD) {
