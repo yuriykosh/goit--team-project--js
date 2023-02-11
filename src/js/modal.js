@@ -1,6 +1,11 @@
+// import { ApiService } from "./ApiServise";
+
 const closeModalBtn = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
+
+const btnAddToWatched = document.querySelector('.btn_add_watched');
+const btnAddToQueue = document.querySelector('.btn_add_queue');
 
 movies.addEventListener('click', clickList);
 
@@ -27,9 +32,12 @@ function closeModal() {
 
 function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
-  if (moviesCard) openModal();
-  const id = moviesCard.id
-  modal.setAttribute("id", id)
+  if (moviesCard) {
+    modal.setAttribute("id", moviesCard.id);
+    btnAddToWatched.setAttribute('data-id', moviesCard.id);
+    btnAddToQueue.setAttribute('data-id', moviesCard.id);
+    openModal();
+  }
 }
 
 function openModal() {
