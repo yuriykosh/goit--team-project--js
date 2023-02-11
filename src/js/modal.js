@@ -1,14 +1,16 @@
 import { ApiService } from './ApiServise';
 import { Notify } from 'notiflix';
 import { spinnerStart, spinnerStop } from './spinner';
+import findMovieTrailer from './player';
+import onBtnClick from './modalBtnLogics';
 
 const closeModalBtn = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
 const wrapper = document.querySelector('.movie-modal');
 
-const btnAddToWatched = document.querySelector('.btn_add_watched');
-const btnAddToQueue = document.querySelector('.btn_add_queue');
+// const btnAddToWatched = document.querySelector('.btn_add_watched');
+// const btnAddToQueue = document.querySelector('.btn_add_queue');
 
 movies.addEventListener('click', clickList);
 
@@ -42,8 +44,8 @@ function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
   if (moviesCard) {
     modal.setAttribute('id', moviesCard.id);
-    btnAddToWatched.setAttribute('data-id', moviesCard.id);
-    btnAddToQueue.setAttribute('data-id', moviesCard.id);
+    // btnAddToWatched.setAttribute('data-id', moviesCard.id);
+    // btnAddToQueue.setAttribute('data-id', moviesCard.id);
     openModal(moviesCard.id);
   }
 }
@@ -65,6 +67,13 @@ async function fetchModalMarkup(id) {
 
     const markUp = createModalMarkup(data);
     wrapper.insertAdjacentHTML('beforeend', markUp);
+
+    const btnAddToWatched = document.querySelector('.btn_add_watched');
+    const btnAddToQueue = document.querySelector('.btn_add_queue');
+    btnAddToWatched.addEventListener('click', (event) => onBtnClick(event, 'WATCHED'));
+btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
+const playBtn = document.querySelector('.js-playBtn');
+playBtn.addEventListener('click', onPlayTrailer);
   } catch (error) {
     console.log(error);
     return Notify.failure('Something went wrong. Please try again later.');
@@ -137,4 +146,9 @@ function createModalMarkup(data) {
     </div>
   </div>
 </div>`
+}
+
+function onPlayTrailer(event) {
+  const moviesId = event.target.closest('[data-modal]').id;
+  findMovieTrailer(moviesId);
 }

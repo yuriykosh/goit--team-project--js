@@ -1,9 +1,9 @@
 import { ApiService } from "./ApiServise";
 
-const btnAddToWatched = document.querySelector('.btn_add_watched');
-const btnAddToQueue = document.querySelector('.btn_add_queue');
+// const btnAddToWatched = document.querySelector('.btn_add_watched');
+// const btnAddToQueue = document.querySelector('.btn_add_queue');
 
-const onBtnClick = async function (event, storageKey) {
+ const onBtnClick = async function (event, storageKey) {
     const movieId = event.target.dataset.id;
     const response = await ApiService.getMoviesById(movieId);
     const movieData = response.data;
@@ -29,5 +29,7 @@ const onBtnClick = async function (event, storageKey) {
 
 }; 
 
-btnAddToWatched.addEventListener('click', (event) => onBtnClick(event, 'WATCHED'));
-btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
+// btnAddToWatched.addEventListener('click', (event) => onBtnClick(event, 'WATCHED'));
+// btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
+
+export default onBtnClick;
