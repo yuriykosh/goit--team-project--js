@@ -10,9 +10,6 @@ const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
 const wrapper = document.querySelector('.movie-modal');
 
-// const btnAddToWatched = document.querySelector('.btn_add_watched');
-// const btnAddToQueue = document.querySelector('.btn_add_queue');
-
 movies.addEventListener('click', clickList);
 
 function clickModal(event) {
@@ -45,8 +42,6 @@ function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
   if (moviesCard) {
     modal.setAttribute('id', moviesCard.id);
-    // btnAddToWatched.setAttribute('data-id', moviesCard.id);
-    // btnAddToQueue.setAttribute('data-id', moviesCard.id);
     openModal(moviesCard.id);
   }
 }
@@ -86,23 +81,22 @@ function createModalMarkup(data) {
   const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;
   let watchedText = '';
   let queueText = '';
-  // const x = JSON.parse(localStorage.getItem('WATCHED'));
-  // console.log(x);
-  // const storageArray = !JSON.parse(localStorage.getItem('WATCHED')) ? [JSON.parse(localStorage.getItem('WATCHED'))] : [];
 
-  // console.log(storageArray);
-  // if (!storageArray) {
-  //   watchedText = 'add to watched';
-  // } else {
-  //   watchedText = !storageArray.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
-  // }
 
-  // const queueArray = !JSON.parse(localStorage.getItem('QUEUE')) ? [JSON.parse(localStorage.getItem('QUEUE'))] : [];
-  // if (!queueArray) {
-  //   queueText = 'add to watched';
-  // } else {
-  //   queueText = !queueArray.find(item => Number(item) === id) ? "add to queue" : "remove from queue";
-  // }
+  const watchedMovie = JSON.parse(localStorage.getItem('WATCHED')) ? JSON.parse(localStorage.getItem('WATCHED')) : [];
+
+  if (!watchedMovie) {
+    watchedText = 'add to watched';
+  } else {
+    watchedText = !watchedMovie.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
+  }
+
+  const queueMovie = JSON.parse(localStorage.getItem('QUEUE')) ? JSON.parse(localStorage.getItem('QUEUE')) : [];
+  if (!queueMovie) {
+    queueText = 'add to watched';
+  } else {
+    queueText = !queueMovie.find(item => Number(item) === id) ? "add to queue" : "remove from queue";
+  }
 
   const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`;
   const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
