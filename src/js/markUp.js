@@ -12,7 +12,8 @@ export function createMainMarkup(results, { data }) {
       const genres = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
 
      return `
-     <li class="movies__item" id=${id}>
+     <li>
+     <a class="movies__item" id=${id}>
         <div class="movies__wrapper">
         <img onerror="this.onerror=null;this.src='${defaultImage}';"
          alt=${title} src=${posterLink} class="movies__poster" loading="lazy">
@@ -24,6 +25,7 @@ export function createMainMarkup(results, { data }) {
             <span class="movies__desc-release-year">${releaseYear}</span>
           </div>
         </div>
+        </a>
       </li>`;
      })
  }     
@@ -40,7 +42,8 @@ export function createMainMarkup(results, { data }) {
   const voteAverage = vote_average.toFixed(1);
 
  return `
- <li class="movies__item" id=${id}>
+ <li>
+ <a class="movies__item" id=${id}>
     <div class="movies__wrapper">
     <img 
      alt=${title} src=${posterLink} onerror="this.onerror=null;this.src='${defaultImage}';" class="movies__poster" loading="lazy">
@@ -53,6 +56,7 @@ export function createMainMarkup(results, { data }) {
         <span class="movies__vote is-hidden">${voteAverage}</span>
       </div>
     </div>
+    </a>
   </li>`;
  }
 
