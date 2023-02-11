@@ -33,7 +33,7 @@ function closeModal() {
 function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
   if (moviesCard) {
-    modal.setAttribute("id", moviesCard.id);
+    modal.setAttribute('id', moviesCard.id);
     btnAddToWatched.setAttribute('data-id', moviesCard.id);
     btnAddToQueue.setAttribute('data-id', moviesCard.id);
     openModal();
