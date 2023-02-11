@@ -11,9 +11,7 @@ export default async function findMovieTrailer(id) {
       const response = await ApiService.getMovieTreiler(id);
       const { data } = response;
   
-      const videoKey = data.results.find(
-        result => result.type === 'Trailer' && result.official
-      ).key;
+      const videoKey = data.results.find(result => result.type === 'Trailer' && result.official).key;
       videoID = videoKey;
   
       createPlayer(videoID);
@@ -22,7 +20,7 @@ export default async function findMovieTrailer(id) {
   
     } catch (error) {
       console.log(error);
-      return Notify.failure('Something went wrong. Please try again later.');
+      return Notify.failure('Sorry, there no trailer to this film!');
     }
   }
   
