@@ -9,6 +9,7 @@ const btnAddToQueue = document.querySelector('.btn_add_queue');
 
 movies.addEventListener('click', clickList);
 
+
 function clickModal(event) {
   console.log('test');
   if (
@@ -26,11 +27,13 @@ function clickModal(event) {
 function closeModal() {
   modal.classList.add('is-hidden');
   document.body.style.overflow = 'visible';
+  modal.removeAttribute("id")
 }
 
 function clickList(event) {
   const moviesCard = event.target.closest('.movies__item');
   if (moviesCard) {
+    modal.setAttribute("id", moviesCard.id);
     btnAddToWatched.setAttribute('data-id', moviesCard.id);
     btnAddToQueue.setAttribute('data-id', moviesCard.id);
     openModal();

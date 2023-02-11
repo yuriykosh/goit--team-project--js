@@ -2,10 +2,15 @@ import { ApiService } from "./ApiServise";
 import { spinnerStart, spinnerStop } from "./spinner";
 import { Notify } from "notiflix";
 import { pagination } from './tuiPagination';
+import { onScroll, onToTopBtn } from "./scroll-to-top";
 
 const gallery = document.querySelector('.movies');   
 const paginationBlock = document.querySelector('.tui-pagination')
+const toTopBtn = document.querySelector('.btn-to-top');
 const currentPage = pagination.getCurrentPage();
+
+window.addEventListener('scroll', onScroll);
+toTopBtn.addEventListener('click', onToTopBtn);
 
 // Запрашиваем данные из localstorage для idList
 let idList = [696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 696157, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 597, 646389, 646389, 646389, 646389, 646389, 646389];  ///Пример
@@ -39,7 +44,7 @@ function loadOnePage(pageNumber) {
 function loadMore(event) {
     gallery.innerHTML = '';
     const currentPage = event.page;
-    console.log(currentPage);
+
     try {
       spinnerStart();
       loadOnePage(currentPage);

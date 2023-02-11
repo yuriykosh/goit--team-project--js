@@ -1,0 +1,19 @@
+.player__frame {
+    z-index: 100001;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 240px;
+    min-height: 150px;
+    transform: translate(-50%, -50%);
+
+    @media screen and (min-width: 768px) {
+        min-width: 640px;
+        min-height: 360px;
+    }
+    @media screen and (min-width: 1280px) {
+        min-width: 806px;
+        min-height: 410px;
+    }
+
+}

@@ -3,14 +3,20 @@ import { ApiService } from './ApiServise';
 import createMarkup from './markUp';
 import { spinnerStart, spinnerStop } from './spinner';
 import { pagination } from './tuiPagination';
+import findMovieTrailer from './player';
+import { onScroll, onToTopBtn } from "./scroll-to-top";
 
 const gallery = document.querySelector('.movies');
 const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
-const player = document.querySelector('.player');
+const toTopBtn = document.querySelector('.btn-to-top');
+const playBtn = document.querySelector('.js-playBtn');
 
 formEl.addEventListener('submit', onFormSubmit);
+window.addEventListener('scroll', onScroll);
+toTopBtn.addEventListener('click', onToTopBtn);
+playBtn.addEventListener('click', onPlayTrailer);
 
 Notify.init({
   width: '400px',
@@ -143,37 +149,7 @@ async function loadMoreTrendingMovies(event) {
   }
 }
 
-async function findMovieTrailer(id) {
-  try {
-    const response = await ApiService.getMovieTreiler(id);
-    const { data } = response;
-
-    console.log(data.results);
-
-    const videoKey = data.results.find(
-      result => result.type === 'Trailer' && result.official
-    ).key;
-    videoID = videoKey;
-    console.log(videoID);
-
-    random(videoID);
-
-  } catch (error) {
-    console.log(error);
-    return Notify.failure('Something went wrong. Please try again later.');
-  }
+function onPlayTrailer(event) {
+  const moviesId = event.target.closest('[data-modal]').id;
+  findMovieTrailer(moviesId);
 }
-
-// findMovieTrailer(615777);
-
-
-
-
-
-function random (id) {
-
-const frame = `<iframe id="player" type="text/html" width="640" height="360"
-src="http://www.youtube.com/embed/${id}?enablejsapi=1&origin=http://example.com"frameborder="0"></iframe>`;
-player.innerHTML = frame;
-}
-random()
