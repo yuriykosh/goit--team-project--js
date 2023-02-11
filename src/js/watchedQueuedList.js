@@ -9,20 +9,21 @@ const refs = {
     watched: document.querySelector('.button-watched'), 
     queued: document.querySelector('.button-queued'), 
     movieList: document.querySelector('.movies'), 
-    paginationBlock: document.querySelector('.tui-pagination'),
+    paginationBlock: document.querySelector('#pagination'),
     toTopBtn: document.querySelector('.btn-to-top')
 }
 
-refs.watched.isActive = true;
-console.dir(refs.queued);
+refs.watched.classList.add('is-active');
+refs.paginationBlock.classList.add('is-hidden');
 
 let STORAGE_KEY = 'WATCHED';
 let idList = JSON.parse(localStorage.getItem(STORAGE_KEY));
-console.dir(idList);
-
 let totalItems = !idList ? 0 : idList.length;
 pagination.reset(totalItems);
 const currentPage = pagination.getCurrentPage();
+loadMoviesList(idList);
+
+pagination.on('afterMove', loadMore);  
 
 window.addEventListener('scroll', onScroll);
 refs.watched.addEventListener('click', onClick);
@@ -30,6 +31,7 @@ refs.queued.addEventListener('click', onClick);
 refs.toTopBtn.addEventListener('click', onToTopBtn);
 
 function onClick(event) {
+  refs.watched.classList.remove('is-active');
   STORAGE_KEY = event.target.dataset.name;
   clearMovieList();   
   loadMoviesList(idList);
@@ -37,7 +39,6 @@ function onClick(event) {
 
 function loadMoviesList(list) {
   if (!list) {
-      spinnerStop()
       refs.movieList.innerHTML = `
       <li>
         <img src="${empty}" alt="The list is empty." />
@@ -60,7 +61,6 @@ async function findMovieById(id) {
 
     const galleryMarkup = createNewMarkup(data);
     refs.movieList.insertAdjacentHTML('beforeend', galleryMarkup);
-    refs.paginationBlock.classList.remove('is-hidden')
   }
   catch(error) {
       console.log(error);
@@ -76,7 +76,26 @@ function clearMovieList(){
    refs.movieList.innerHTML = ""; 
 }
 
+function loadMore(event) {
+  refs.movieList.innerHTML = '';
+  const currentPage = event.page;
+
+  try {
+    spinnerStart();
+    loadOnePage(currentPage);
+    refs.paginationBlock.classList.remove('is-hidden')
+  } catch (error) {
+    refs.paginationBlock.classList.add('is-hidden');
+    console.log(error);
+    return Notify.failure('Something went wrong. Please try again later.');
+  } finally {
+    spinnerStop();
+  }
+}
+
 function createNewMarkup(data) {
+  const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
+
   const {genres, poster_path, release_date, title, vote_average, id } = data;
 
   const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
@@ -89,7 +108,7 @@ function createNewMarkup(data) {
  <li class="movies__item" id=${id}>
     <div class="movies__wrapper">
     <img 
-     alt=${title} src=${posterLink} class="movies__poster" loading="lazy">
+     alt=${title} src=${posterLink} onerror="this.onerror=null;this.src='${defaultImage}';" class="movies__poster" loading="lazy">
     </div>
     <div class="movies__meta">
       <h2 class="movies__title">${title}</h2>

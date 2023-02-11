@@ -5,7 +5,6 @@ import findMovieTrailer from './player';
 import onBtnClick from './modalBtnLogics';
 import 'material-icons/iconfont/material-icons.css';
 
-const closeModalBtn = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
 const wrapper = document.querySelector('.movie-modal');
@@ -83,8 +82,7 @@ function createModalMarkup(data) {
   let queueText = '';
   let watchedMovie = [];
   let queueMovie = [];
-  // localStorage.setItem('WATCHED', JSON.stringify(watchedMovie))
-  // localStorage.setItem('WATCHED', JSON.stringify(4343))
+
 
    watchedMovie = JSON.parse(localStorage.getItem('WATCHED')) ? JSON.parse(localStorage.getItem('WATCHED')) : [];
 
