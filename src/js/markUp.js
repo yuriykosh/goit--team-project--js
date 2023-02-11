@@ -1,3 +1,5 @@
+import localStorageService from "./localStorage-service";
+
 const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; 
 
 
@@ -68,8 +70,7 @@ export function createMainMarkup(results, { data }) {
   let watchedMovie = [];
   let queueMovie = [];
 
-
-   watchedMovie = JSON.parse(localStorage.getItem('WATCHED')) ? JSON.parse(localStorage.getItem('WATCHED')) : [];
+  watchedMovie = localStorageService.load('WATCHED') ? localStorageService.load('WATCHED') : [];
 
   if (!watchedMovie) {
     watchedText = 'add to watched';
@@ -77,7 +78,7 @@ export function createMainMarkup(results, { data }) {
     watchedText = !watchedMovie.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
   }
 
-   queueMovie = JSON.parse(localStorage.getItem('QUEUE')) ? JSON.parse(localStorage.getItem('QUEUE')) : [];
+   queueMovie = localStorageService.load('QUEUE') ? localStorageService.load('QUEUE') : [];
   if (!queueMovie) {
     queueText = 'add to watched';
   } else {

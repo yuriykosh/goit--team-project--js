@@ -1,10 +1,10 @@
-// import loadMoviesList from "./watchedQueuedList";
+import localStorageService from "./localStorage-service";
 
 const onBtnClick = function (event, storageKey) {
     let text = event.target.textContent;
     const movieId = event.target.dataset.id;
     
-    let queueMovie = JSON.parse(localStorage.getItem(storageKey));
+    let queueMovie = localStorageService.load(storageKey);
 
     if(!queueMovie){
         queueMovie = [];
@@ -13,14 +13,14 @@ const onBtnClick = function (event, storageKey) {
     if (text.includes('add to')) {
         event.target.textContent = text.replace('add to', 'remove from');
         queueMovie.push(movieId.toString());
-        localStorage.setItem(storageKey, JSON.stringify(queueMovie));
+        localStorageService.save(storageKey, queueMovie);
     } else{
         event.target.textContent = text.replace('remove from', 'add to');
         queueMovie = queueMovie.filter((item) => item !== movieId)
-        localStorage.setItem(storageKey, JSON.stringify(queueMovie));
+        localStorageService.save(storageKey, queueMovie);
     }
 
-    let idList = JSON.parse(localStorage.getItem(storageKey));
+    let idList = localStorageService.load(storageKey);
     // loadMoviesList(idList);
 }; 
 

@@ -5,6 +5,7 @@ import empty from '../images/empty-list.gif';
 import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
 import { createGalleryMarkup } from './markUp';
+import localStorageService from './localStorage-service';
 
 const refs = {
     watched: document.querySelector('.button-watched'), 
@@ -19,7 +20,7 @@ refs.paginationBlock.classList.add('is-hidden');
 
 
 let STORAGE_KEY = 'WATCHED';
-let idList = JSON.parse(localStorage.getItem(STORAGE_KEY));
+let idList = localStorageService.load(STORAGE_KEY);
 let totalItems = !idList ? 0 : idList.length;
 pagination.reset(totalItems);
 const currentPage = pagination.getCurrentPage();
