@@ -3,6 +3,7 @@ import { Notify } from 'notiflix';
 import { spinnerStart, spinnerStop } from './spinner';
 import findMovieTrailer from './player';
 import onBtnClick from './modalBtnLogics';
+import 'material-icons/iconfont/material-icons.css';
 
 const closeModalBtn = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
@@ -34,13 +35,10 @@ function clickModal(event) {
 function closeModal() {
   modal.classList.add('is-hidden');
   document.body.style.overflow = 'visible';
-  wrapper.innerHTML =     `<div class="player"></div>
-  <button data-modal-close class="movie-modal__close-btn" type="button">
-    <svg class="movie-modal__close-btn-icon" width="30" height="30">
-      <use href="./images/symbol.svg#icon-close-btn-modal"></use>
-    </svg>
-  </button>`;
-  modal.removeAttribute("id")
+  const markupWrapper = document.querySelector('.movie-modal__wrapper');
+  modal.removeAttribute("id");
+  markupWrapper.remove();
+  
 }
 
 function clickList(event) {
@@ -73,9 +71,9 @@ async function fetchModalMarkup(id) {
     const btnAddToWatched = document.querySelector('.btn_add_watched');
     const btnAddToQueue = document.querySelector('.btn_add_queue');
     btnAddToWatched.addEventListener('click', (event) => onBtnClick(event, 'WATCHED'));
-btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
-const playBtn = document.querySelector('.js-playBtn');
-playBtn.addEventListener('click', onPlayTrailer);
+    btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
+    const playBtn = document.querySelector('.js-playBtn');
+    playBtn.addEventListener('click', onPlayTrailer);
   } catch (error) {
     console.log(error);
     return Notify.failure('Something went wrong. Please try again later.');
@@ -85,11 +83,28 @@ playBtn.addEventListener('click', onPlayTrailer);
 }
 
 function createModalMarkup(data) {
+  const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;
+  let watchedText = '';
+  let queueText = '';
+  // const x = JSON.parse(localStorage.getItem('WATCHED'));
+  // console.log(x);
+  // const storageArray = !JSON.parse(localStorage.getItem('WATCHED')) ? [JSON.parse(localStorage.getItem('WATCHED'))] : [];
+
+  // console.log(storageArray);
+  // if (!storageArray) {
+  //   watchedText = 'add to watched';
+  // } else {
+  //   watchedText = !storageArray.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
+  // }
+
+  // const queueArray = !JSON.parse(localStorage.getItem('QUEUE')) ? [JSON.parse(localStorage.getItem('QUEUE'))] : [];
+  // if (!queueArray) {
+  //   queueText = 'add to watched';
+  // } else {
+  //   queueText = !queueArray.find(item => Number(item) === id) ? "add to queue" : "remove from queue";
+  // }
 
   const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`;
-
-  const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;
-
   const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
   const genresList = genres.map(genre => genre.name);
   const genresItems = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
@@ -99,9 +114,7 @@ function createModalMarkup(data) {
   return `<div class="movie-modal__wrapper">
     <div class="movie-modal__imgBox">
     <button class="movie-modal__video-btn js-playBtn">
-      <svg class="movie-modal__play-btn" width="80" height="80">
-        <use href="./images/symbol.svg#icon-play"></use>
-      </svg>
+      <span class="material-icons-round" style="font-size: 80px">play_circle</span>
     </button>
     <img class="movie-modal__imgBox__img" src=${posterLink}
       alt=${title} onerror="this.onerror=null;this.src='${defaultImage}';"/>
@@ -140,10 +153,10 @@ function createModalMarkup(data) {
     </div>
     <div class="movie-modal__button">
       <button id="add-to-watched" class="movie-modal__button__item btn_add_watched" data-id=${id}>
-        add to watched
+        ${watchedText}
       </button>
       <button id="add-to-queue" class="movie-modal__button__item btn_add_queue" data-id=${id}>
-        add to queue
+        ${queueText}
       </button>
     </div>
   </div>
