@@ -1740,5 +1740,5 @@ const Or=O("authIdTokenMaxAge")||300;let Nr=null;var Ar;Ar="Browser",Se(new $("a
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */}));function Hr(){Cr.classList.toggle("is-hidden")}Lr.addEventListener("click",(async()=>{const e=Ur.value,t=Fr.value;try{const n=await wn(jr,e,t);Hr(),kr.Notify.success("You are successfully signed in"),Pr.reset(),Vr.classList.remove("visually-hidden"),xr.classList.add("is-hidden"),console.log(n.user)}catch(e){e.code==$e.INVALID_PASSWORD?kr.Notify.failure("Wrong password. Please try again."):kr.Notify.failure(`Error: ${e.message}`),console.log(e)}})),Rr.addEventListener("click",Hr),Dr.addEventListener("click",Hr),console.log(Rr);
-//# sourceMappingURL=index.21d40387.js.map
+ */}));function Hr(){Cr.classList.toggle("is-hidden")}Lr.addEventListener("click",(async()=>{const e=Ur.value,t=Fr.value;try{const n=await wn(jr,e,t);Hr(),kr.Notify.success("You are successfully signed in"),Pr.reset(),Vr.classList.remove("visually-hidden"),xr.classList.add("is-hidden"),console.log(n.user)}catch(e){e.code==$e.INVALID_PASSWORD?kr.Notify.failure("Wrong password. Please try again."):kr.Notify.failure(`Error: ${e.message}`),console.log(e)}})),Rr.addEventListener("click",Hr),Dr.addEventListener("click",Hr);
+//# sourceMappingURL=index.144b7b47.js.map
