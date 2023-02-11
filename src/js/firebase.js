@@ -3,15 +3,13 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
 } from 'firebase/auth';
 
 import { AuthErrorCodes } from 'firebase/auth';
 import { Notify } from 'notiflix';
 
 //refs
-// openModalBtn: document.querySelector('[data-modal-products1-open]'),
+const openModalBtn = document.querySelector('[data-modal-auth-open]');
 const closeModalBtn = document.querySelector('[data-auth-modal-close]');
 const modalEl = document.querySelector('[data-auth-modal]');
 const formEl = document.querySelector('.auth-form');
@@ -90,10 +88,11 @@ const onBtnSignClick = async () => {
 
 btnSign.addEventListener('click', onBtnSignClick);
 
-//   openModalBtn.addEventListener('click', toggleModal);
-
 function toggleModal() {
   modalEl.classList.toggle('is-hidden');
 }
 
+openModalBtn.addEventListener('click', toggleModal);
 closeModalBtn.addEventListener('click', toggleModal);
+
+console.log(openModalBtn);
