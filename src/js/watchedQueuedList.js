@@ -4,17 +4,19 @@ import { spinnerStart, spinnerStop } from "./spinner";
 import empty from '../images/empty-list.gif';
 import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
+import { createGalleryMarkup } from './markUp';
 
 const refs = {
     watched: document.querySelector('.button-watched'), 
     queued: document.querySelector('.button-queued'), 
     movieList: document.querySelector('.movies'), 
     paginationBlock: document.querySelector('#pagination'),
-    toTopBtn: document.querySelector('.btn-to-top')
+    toTopBtn: document.querySelector('.btn-to-top'),
 }
 
 refs.watched.classList.add('is-active');
 refs.paginationBlock.classList.add('is-hidden');
+
 
 let STORAGE_KEY = 'WATCHED';
 let idList = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -63,7 +65,7 @@ async function findMovieById(id) {
     const response = await ApiService.getMoviesById(id);
     const { data } = response;
 
-    const galleryMarkup = createNewMarkup(data);
+    const galleryMarkup = createGalleryMarkup(data);
     refs.movieList.insertAdjacentHTML('beforeend', galleryMarkup);
     refs.paginationBlock.classList.remove('is-hidden');
   }
@@ -97,31 +99,3 @@ function loadMore(event) {
     spinnerStop();
   }
 }
-
-function createNewMarkup(data) {
-  const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
-
-  const {genres, poster_path, release_date, title, vote_average, id } = data;
-
-  const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const releaseYear = release_date.slice(0, 4);
-  const genresList = genres.map(genre => genre.name);
-  const genresItems = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
-  const voteAverage = vote_average.toFixed(1);
-
- return `
- <li class="movies__item" id=${id}>
-    <div class="movies__wrapper">
-    <img 
-     alt=${title} src=${posterLink} onerror="this.onerror=null;this.src='${defaultImage}';" class="movies__poster" loading="lazy">
-    </div>
-    <div class="movies__meta">
-      <h2 class="movies__title">${title}</h2>
-      <div class="movies__desc">
-        <span class="movies__desc-genres">${genresItems}</span>|
-        <span class="movies__desc-release-year">${releaseYear}</span>
-        <span class="movies__vote is-hidden">${voteAverage}</span>
-      </div>
-    </div>
-  </li>`;
- }

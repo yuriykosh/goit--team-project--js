@@ -20,7 +20,7 @@ const onBtnClick = function (event, storageKey) {
         localStorage.setItem(storageKey, JSON.stringify(queueMovie));
     }
 
-    // let idList = JSON.parse(localStorage.getItem(storageKey));
+    let idList = JSON.parse(localStorage.getItem(storageKey));
     // loadMoviesList(idList);
 }; 
 
