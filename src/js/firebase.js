@@ -33,6 +33,10 @@ const firebaseApp = initializeApp({
 
 // Initialize Firebase
 const auth = getAuth(firebaseApp);
+const STORAGE_KEY = 'login-sign up';
+
+let callCount = JSON.parse(localStorage.getItem(STORAGE_KEY)) || 0;
+showLibraryBtn();
 
 //login
 const onBtnLoginClick = async () => {
@@ -45,11 +49,17 @@ const onBtnLoginClick = async () => {
       loginEmail,
       loginPassword
     );
+
+    openModal();
+
     Notify.success(`You are logged in`);
-    toggleModal();
+    callCount += 1;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(callCount));
+
+    closeModal();
     formEl.reset();
-    libraryEl.classList.remove('visually-hidden');
-    loginEl.classList.add('is-hidden');
+    location.reload();
+
     console.log(userCredential.user);
   } catch (err) {
     if (err.code == AuthErrorCodes.INVALID_PASSWORD) {
@@ -61,8 +71,6 @@ const onBtnLoginClick = async () => {
     console.log(err);
   }
 };
-
-btnLogin.addEventListener('click', onBtnLoginClick);
 
 //Sign up
 const onBtnSignClick = async () => {
@@ -76,11 +84,18 @@ const onBtnSignClick = async () => {
       loginPassword
     );
 
-    toggleModal();
+    openModal();
+    callCount += 1;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(callCount));
+
+    console.log(callCount);
     Notify.success(`You are successfully signed in`);
     formEl.reset();
-    libraryEl.classList.remove('visually-hidden');
-    loginEl.classList.add('is-hidden');
+    location.reload();
+
+    closeModal();
+
     console.log(userCredential.user);
   } catch (err) {
     if (err.code == AuthErrorCodes.INVALID_PASSWORD) {
@@ -92,11 +107,30 @@ const onBtnSignClick = async () => {
   }
 };
 
-btnSign.addEventListener('click', onBtnSignClick);
-
-function toggleModal() {
-  modalEl.classList.toggle('is-hidden');
+function openModal() {
+  modalEl.classList.remove('is-hidden');
+  document.addEventListener('keydown', onEscapeKeyDown);
 }
 
-openModalBtn.addEventListener('click', toggleModal);
-closeModalBtn.addEventListener('click', toggleModal);
+function closeModal() {
+  modalEl.classList.add('is-hidden');
+  document.removeEventListener('keydown', onEscapeKeyDown);
+}
+
+btnLogin.addEventListener('click', onBtnLoginClick);
+btnSign.addEventListener('click', onBtnSignClick);
+openModalBtn.addEventListener('click', openModal);
+closeModalBtn.addEventListener('click', closeModal);
+
+function onEscapeKeyDown(e) {
+  if (e.code === 'Escape') {
+    closeModal();
+  }
+}
+
+function showLibraryBtn() {
+  if (callCount) {
+    libraryEl.classList.remove('visually-hidden');
+    loginEl.classList.add('is-hidden');
+  }
+}

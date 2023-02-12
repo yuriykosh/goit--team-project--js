@@ -204,7 +204,8 @@
   transition: color var(--transition-dur-and-func);
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--red);
   }
 }
@@ -217,7 +218,8 @@
   display: block;
   transition: color var(--transition-dur-and-func);
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--red);
   }
 }
