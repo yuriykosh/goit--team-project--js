@@ -35,31 +35,36 @@ export function createMainMarkup(results, { data }) {
  export function createGalleryMarkup(data) {
   const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
 
-  const {genres, poster_path, release_date, title, vote_average, id } = data;
+  const galleryMarkUp = data.map((item) => {
+    const {genres, poster_path, release_date, title, vote_average, id } = item;
 
-  const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const releaseYear = release_date.slice(0, 4);
-  const genresList = genres.map(genre => genre.name);
-  const genresItems = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
-  const voteAverage = vote_average.toFixed(1);
-
- return `
- <li>
- <a class="movies__item" id=${id}>
-    <div class="movies__wrapper">
-    <img 
-     alt=${title} src=${posterLink} onerror="this.onerror=null;this.src='${defaultImage}';" class="movies__poster" loading="lazy">
-    </div>
-    <div class="movies__meta">
-      <h2 class="movies__title">${title}</h2>
-      <div class="movies__desc">
-        <span class="movies__desc-genres">${genresItems}</span>|
-        <span class="movies__desc-release-year">${releaseYear}</span>
-        <span class="movies__vote is-hidden">${voteAverage}</span>
+    const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const releaseYear = release_date.slice(0, 4);
+    const genresList = genres.map(genre => genre.name);
+    const genresItems = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
+    const voteAverage = vote_average.toFixed(1);
+  
+   return `
+   <li>
+   <a class="movies__item" id=${id}>
+      <div class="movies__wrapper">
+      <img 
+       alt=${title} src=${posterLink} onerror="this.onerror=null;this.src='${defaultImage}';" class="movies__poster" loading="lazy">
       </div>
-    </div>
-    </a>
-  </li>`;
+      <div class="movies__meta">
+        <h2 class="movies__title">${title}</h2>
+        <div class="movies__desc">
+          <span class="movies__desc-genres">${genresItems}</span>|
+          <span class="movies__desc-release-year">${releaseYear}</span>
+          <span class="movies__vote is-hidden">${voteAverage}</span>
+        </div>
+      </div>
+      </a>
+    </li>`;
+  })
+
+  return galleryMarkUp;
+
  }
 
 
