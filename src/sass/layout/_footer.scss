@@ -88,13 +88,11 @@
     border: none;
     background-color: transparent;
 
-
 &:hover,
 &:focus {
     color: #ff6b08;
 }
 @media screen and (max-width: 255px) {
     padding-top: 10px;
-    // padding-bottom: 10px;
 }
 }
