@@ -2,7 +2,7 @@ import { Notify } from 'notiflix';
 import { ApiService } from './ApiServise';
 import { spinnerStart, spinnerStop } from "./spinner";
 import empty from '../images/empty-list.gif';
-import { pagination } from './tuiPagination';
+// import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
 import { createGalleryMarkup } from './markUp';
 import localStorageService from './localStorage-service';
@@ -15,31 +15,49 @@ const refs = {
     toTopBtn: document.querySelector('.btn-to-top'),
 }
 
-refs.watched.classList.add('is-active');
-refs.paginationBlock.classList.add('is-hidden');
-
-
-let STORAGE_KEY = 'WATCHED';
-let idList = localStorageService.load(STORAGE_KEY);
-
-let totalItems = !idList ? 0 : idList.length;
-pagination.reset(totalItems);
-const currentPage = pagination.getCurrentPage();
-loadMoviesList(idList);
-
-pagination.on('afterMove', loadMore);  
-
 window.addEventListener('scroll', onScroll);
 refs.watched.addEventListener('click', onClick);
 refs.queued.addEventListener('click', onClick);
 refs.toTopBtn.addEventListener('click', onToTopBtn);
 
+let STORAGE_KEY = 'WATCHED';
+
 function onClick(event) {
-  refs.watched.classList.remove('is-active');
   STORAGE_KEY = event.target.dataset.name;
-  clearMovieList();   
-  loadMoviesList(idList);
+  let movieList = localStorageService.load(STORAGE_KEY); 
+if (STORAGE_KEY === 'WATCHED') {
+  refs.watched.classList.add('is-active');
+  refs.queued.classList.remove('is-active');
+} else{
+  refs.queued.classList.add('is-active');
+  refs.watched.classList.remove('is-active');
 }
+
+  // clearMovieList();   
+loadMoviesList(movieList);
+
+
+}
+
+
+
+// refs.watched.classList.add('is-active');
+// refs.paginationBlock.classList.add('is-hidden');
+
+
+
+// let idList = localStorageService.load(STORAGE_KEY);
+
+// let totalItems = !idList ? 0 : idList.length;
+// pagination.reset(totalItems);
+// const currentPage = pagination.getCurrentPage();
+// loadMoviesList(idList);
+
+// pagination.on('afterMove', loadMore);  
+
+
+
+
 
 export default function loadMoviesList(list) {
   if (!list) {
@@ -49,7 +67,8 @@ export default function loadMoviesList(list) {
       </li>`;
     return;
   }
-  loadOnePage(currentPage);
+createGalleryMarkup(list);
+  // loadOnePage(currentPage);
 }   
 
 function loadOnePage(pageNumber) {
@@ -102,3 +121,97 @@ function loadMore(event) {
     spinnerStop();
   }
 }
+
+
+
+// import { Notify } from 'notiflix';
+// import { ApiService } from './ApiServise';
+// const STORAGE_KEY = 'movie';
+// localStorage.setItem(STORAGE_KEY, 520);
+
+// const refs = {
+//     watched: document.querySelector('.button-watched'), 
+//     queued: document.querySelector('.button-queued'), 
+//     movieList: document.querySelector('.movies'), 
+// }
+
+// const userId = 5;
+
+// refs.watched.addEventListener('click', onWatchedClick);
+
+// function onWatchedClick(event) {
+//    if (userId === 5) {
+// clearMovieList();   
+// const markUp = `<li class="movies__item">
+//         <div class="movies__wrapper">
+//           <img loading="lazy" class="movies__poster" src="/mobile-poster-filler.68d38ad9.jpeg" alt="movies__poster">
+//         </div>
+//         <div class="movies__meta">
+//           <h2 class="movies__title">Monster Hunter</h2>
+//           <div class="movies__desc">
+//             <span class="movies__desc-genres">Drama, Action</span>|
+//             <span class="movies__desc-release-year">2020</span>
+//             <span class="movies__vote">8.3</span>
+//           </div>
+//         </div>
+//       </li>`;
+// refs.movieList.insertAdjacentHTML('beforeend', markUp);
+// } 
+// }
+
+// export default function createMovieMarkup(results) {
+//     return results.map(result => {
+//       const { genre_ids, poster_path, release_date, title, vote_average } = result;
+//       const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+//       const releaseYear = release_date.slice(0, 4);
+//       const genresList = data.genres.filter(genre => genre_ids.includes(genre.id))
+//       .map(item => item.name);
+//       const genres = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
+//       const defaultImage = "/src/images/mobile-poster-filler.jpeg";
+//       const voteAverage = vote_average.toFixed(1);
+
+//      return `
+//      <li class="movies__item">
+//         <div class="movies__wrapper">
+//           <img
+//             loading="lazy"
+//             class="movies__poster"
+//             src=${posterLink}
+//             onerror=${defaultImage}
+//             alt=${title}
+//           />
+//         </div>
+//         <div class="movies__meta">
+//           <h2 class="movies__title">${title}</h2>
+//           <div class="movies__desc">
+//             <span class="movies__desc-genres">${genres}</span>|
+//             <span class="movies__desc-release-year">${releaseYear}</span>
+//             <span class="movies__vote is-hidden">${voteAverage}</span>
+//           </div>
+//         </div>
+//       </li>`;
+//      })
+//  }     
+
+// async function watchedMovie(id) {
+//     console.log('hello')
+//     try { 
+//         const response = await ApiService.getMoviesById(id);
+//         const { data } = response;
+
+//         console.log(data);
+//         createMarkup(data); 
+
+//     }
+//     catch(error) {
+
+//         console.log(error);
+//         return Notify.failure('Something went wrong. Please try again later.');
+//     }
+// }
+
+//  watchedMovie(505642)
+
+// function clearMovieList(){
+//    refs.movieList.innerHTML = ""; 
+// }
