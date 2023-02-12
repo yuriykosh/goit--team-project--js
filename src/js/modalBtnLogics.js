@@ -39,6 +39,15 @@ const onBtnClick = async function (event, storageKey) {
             </li>`;
           return;
         }
+
+        if(storageKey === "WATCHED" & refs.queued.classList.contains('is-active')) {
+          return;
+        }
+
+        if(storageKey === "QUEUE" & refs.watched.classList.contains('is-active')) {
+          return;
+        }
+
       const galeryMarkUp = createGalleryMarkup(queueMovie);
       refs.movieList.innerHTML = galeryMarkUp.join('');
     }
