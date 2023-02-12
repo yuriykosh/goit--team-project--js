@@ -20,32 +20,33 @@ refs.watched.addEventListener('click', onClick);
 refs.queued.addEventListener('click', onClick);
 refs.toTopBtn.addEventListener('click', onToTopBtn);
 
-// let STORAGE_KEY = '';
+let STORAGE_KEY = '';
+
+startPage('WATCHED');
 
 function onClick(event) {
-  let STORAGE_KEY = event.target.dataset.name;
+  STORAGE_KEY = event.target.dataset.name;
 
   let movieList = localStorageService.load(STORAGE_KEY); 
-if (STORAGE_KEY === 'WATCHED') {
+  if (STORAGE_KEY === 'WATCHED') {
+    refs.watched.classList.add('is-active');
+    refs.queued.classList.remove('is-active');
+  } else{
+    refs.queued.classList.add('is-active');
+    refs.watched.classList.remove('is-active');
+  }
+  loadMoviesList(movieList);
+}
+
+function startPage(buttonKey) {
   refs.watched.classList.add('is-active');
-  refs.queued.classList.remove('is-active');
-} else{
-  refs.queued.classList.add('is-active');
-  refs.watched.classList.remove('is-active');
-}
-
-  // clearMovieList();   
-loadMoviesList(movieList);
-
-
+  STORAGE_KEY = buttonKey;
+  let movieList = localStorageService.load(STORAGE_KEY); 
+  loadMoviesList(movieList);
 }
 
 
-
-// refs.watched.classList.add('is-active');
 // refs.paginationBlock.classList.add('is-hidden');
-
-
 
 // let idList = localStorageService.load(STORAGE_KEY);
 
