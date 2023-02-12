@@ -6,7 +6,7 @@ const options = {
   itemsPerPage: 20,
   visiblePages: 5,
   page: 1,
-  centerAlign: false,
+  centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
   template: {
