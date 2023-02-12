@@ -12,9 +12,8 @@ export default async function findMovieTrailer(id) {
       const { data } = response;
   
       const videoKey = data.results.find(result => result.type === 'Trailer' && result.official).key;
-      videoID = videoKey;
   
-      createPlayer(videoID);
+      createPlayer(videoKey);
       
       window.addEventListener('keydown', onEscPress)
   

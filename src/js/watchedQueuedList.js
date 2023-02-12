@@ -1,5 +1,5 @@
 import empty from '../images/empty-list.gif';
-// import { pagination } from './tuiPagination';
+import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
 import { createGalleryMarkup } from './markUp';
 import localStorageService from './localStorage-service';
@@ -32,6 +32,17 @@ function startPage(buttonKey) {
   refs.watched.classList.add('is-active');
   STORAGE_KEY = buttonKey;
   let movieList = localStorageService.load(STORAGE_KEY); 
+  let totalItems = !movieList ? 0 : movieList.length;
+  let totalPages = Math.ceil(totalItems/20);
+
+  if (movieList.length > 20) {
+    refs.paginationBlock.classList.remove('is-hidden');
+    pagination.reset(totalItems);
+    const currentPage = pagination.getCurrentPage();
+    pagination.on('afterMove', loadMore); 
+
+    loadOnePage(currentPage, movieList)
+  }
   loadMoviesList(movieList);
 }
 
@@ -48,6 +59,39 @@ const galeryMarkUp = createGalleryMarkup(list);
 refs.movieList.innerHTML = galeryMarkUp.join('');
   // loadOnePage(currentPage);
 }   
+
+function loadOnePage(pageNumber, list) {
+  let listToDraw = [];
+
+  for(let i=(pageNumber - 1) * 20 ; i<pageNumber * 20; i+=1) {
+    if (i === list.length ) {
+      break;
+    }
+
+    listToDraw.push(list[i]);
+  }
+  loadMoviesList(listToDraw);
+}
+
+function loadMore(event) {
+
+  // refs.movieList.innerHTML = '';
+  const currentPage = event.page;
+  console.log(currentPage);
+
+  // try {
+  //   spinnerStart();
+  //   loadOnePage(currentPage);
+  //   refs.paginationBlock.classList.remove('is-hidden')
+  // } catch (error) {
+  //   refs.paginationBlock.classList.add('is-hidden');
+  //   console.log(error);
+  //   return Notify.failure('Something went wrong. Please try again later.');
+  // } finally {
+  //   spinnerStop();
+  // }
+}
+
 
 
 // refs.paginationBlock.classList.add('is-hidden');
@@ -67,56 +111,15 @@ refs.movieList.innerHTML = galeryMarkUp.join('');
 
 
 
-// function loadOnePage(pageNumber) {
-//   for(let i=(pageNumber - 1) * 20 ; i<pageNumber * 20; i+=1) {
-//     if (i === totalItems ) {
-//       return;
-//     }
-//     findMovieById(idList[i]);
-//   }
-// }
 
-// async function findMovieById(id) {
-//   try {
-//     spinnerStart()
-//     const response = await ApiService.getMoviesById(id);
-//     const { data } = response;
 
-//     const galleryMarkup = createGalleryMarkup(data);
-//     refs.movieList.insertAdjacentHTML('beforeend', galleryMarkup);
-//     refs.paginationBlock.classList.remove('is-hidden');
-//   }
-//   catch(error) {
-//       console.log(error);
-//       refs.paginationBlock.classList.add('is-hidden');
-//       return Notify.failure('Something went wrong. Please try again later.');
-//   }
-//   finally {
-//     spinnerStop();
-//   }
-// }
 
 // function clearMovieList(){
 //    refs.movieList.innerHTML = ""; 
 //    pagination.movePageTo(1);
 // }
 
-// function loadMore(event) {
-//   refs.movieList.innerHTML = '';
-//   const currentPage = event.page;
 
-//   try {
-//     spinnerStart();
-//     loadOnePage(currentPage);
-//     refs.paginationBlock.classList.remove('is-hidden')
-//   } catch (error) {
-//     refs.paginationBlock.classList.add('is-hidden');
-//     console.log(error);
-//     return Notify.failure('Something went wrong. Please try again later.');
-//   } finally {
-//     spinnerStop();
-//   }
-// }
 
 
 
