@@ -26,7 +26,8 @@ export default async function findMovieTrailer(id) {
   
   function createPlayer (id) {
     const frame = `<iframe class="player__frame" id="player" type="text/html"
-    src="http://www.youtube.com/embed/${id}?enablejsapi=1&origin=http://example.com"frameborder="0"></iframe>`;
+    src="http://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen></iframe>`;
     player.innerHTML = frame;
   }
 
