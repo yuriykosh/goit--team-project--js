@@ -60,7 +60,9 @@ const onBtnLoginClick = async () => {
 
     closeModal();
     formEl.reset();
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 700)
 
     console.log(userCredential.user);
   } catch (err) {
@@ -94,7 +96,9 @@ const onBtnSignClick = async () => {
     console.log(callCount);
     Notify.success(`You are successfully signed in`);
     formEl.reset();
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 700)
 
     closeModal();
 
@@ -118,14 +122,18 @@ const logOut = async () => {
   showLibraryBtn();
   Notify.info('You are logged out');
 
-  if (document.title === 'My library') {
+  if (document.title === 'My Library') {
     const newUrl = './index.html';
+    setTimeout(() => {
     document.location.href = newUrl;
+    console.log(document.location.href);
+    }, 700);
+    return;
   }
 
   setTimeout(() => {
     location.reload();
-  }, 700);
+  }, 700)
 };
 
 function openModal() {
