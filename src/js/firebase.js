@@ -116,7 +116,16 @@ const logOut = async () => {
   localStorage.removeItem(STORAGE_KEY);
 
   showLibraryBtn();
-  location.reload();
+  Notify.info('You are logged out');
+
+  if (document.title === 'My library') {
+    const newUrl = './index.html';
+    document.location.href = newUrl;
+  }
+
+  setTimeout(() => {
+    location.reload();
+  }, 700);
 };
 
 function openModal() {
