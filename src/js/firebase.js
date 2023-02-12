@@ -3,6 +3,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 
 import { AuthErrorCodes } from 'firebase/auth';
@@ -19,6 +20,7 @@ const emailEl = document.querySelector('#email');
 const passwordEl = document.querySelector('#password');
 const libraryEl = document.querySelector('#library');
 const loginEl = document.querySelector('#login');
+const logoutEl = document.querySelector('#logout');
 
 //options
 const firebaseApp = initializeApp({
@@ -107,6 +109,16 @@ const onBtnSignClick = async () => {
   }
 };
 
+//Log out
+const logOut = async () => {
+  await signOut(auth);
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  showLibraryBtn();
+  location.reload();
+};
+
 function openModal() {
   modalEl.classList.remove('is-hidden');
   document.addEventListener('keydown', onEscapeKeyDown);
@@ -121,6 +133,7 @@ btnLogin.addEventListener('click', onBtnLoginClick);
 btnSign.addEventListener('click', onBtnSignClick);
 openModalBtn.addEventListener('click', openModal);
 closeModalBtn.addEventListener('click', closeModal);
+logoutEl.addEventListener('click', logOut);
 
 function onEscapeKeyDown(e) {
   if (e.code === 'Escape') {
@@ -131,6 +144,7 @@ function onEscapeKeyDown(e) {
 function showLibraryBtn() {
   if (callCount) {
     libraryEl.classList.remove('visually-hidden');
-    loginEl.classList.add('is-hidden');
+    loginEl.classList.add('visually-hidden');
+    logoutEl.classList.remove('visually-hidden');
   }
 }
