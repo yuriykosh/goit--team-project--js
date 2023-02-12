@@ -1,7 +1,7 @@
 import { ApiService } from './ApiServise';
 import { Notify } from 'notiflix';
 import { spinnerStart, spinnerStop } from './spinner';
-// import findMovieTrailer from './player';
+import findMovieTrailer from './player';
 import onBtnClick from './modalBtnLogics';
 import { createModalMarkup } from './markUp';
 import 'material-icons/iconfont/material-icons.css';
