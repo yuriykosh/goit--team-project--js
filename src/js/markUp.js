@@ -1,7 +1,5 @@
 import localStorageService from "./localStorage-service";
-
-const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; 
-
+import defaultImage from '../images/main-home/poster-filler-desktop.jpeg';
 
 export function createMainMarkup(results, { data }) {
 
@@ -64,9 +62,7 @@ export function createMainMarkup(results, { data }) {
   })
 
   return galleryMarkUp;
-
  }
-
 
  export function createModalMarkup(data) {
   const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;

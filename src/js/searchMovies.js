@@ -3,20 +3,18 @@ import { ApiService } from './ApiServise';
 import { createMainMarkup } from './markUp';
 import { spinnerStart, spinnerStop } from './spinner';
 import { pagination } from './tuiPagination';
-// import findMovieTrailer from './player';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
+import empty from '../images/empty-list.gif';
 
 const gallery = document.querySelector('.movies');
 const formEl = document.querySelector('.js-form');
 const paginationBlock = document.querySelector('.tui-pagination')
 const currentPage = pagination.getCurrentPage();
 const toTopBtn = document.querySelector('.btn-to-top');
-// const playBtn = document.querySelector('.js-playBtn');
 
 formEl.addEventListener('submit', onFormSubmit);
 window.addEventListener('scroll', onScroll);
 toTopBtn.addEventListener('click', onToTopBtn);
-// playBtn.addEventListener('click', onPlayTrailer);
 
 Notify.init({
   width: '400px',
@@ -62,6 +60,10 @@ async function fetchMovies() {
 
     if (results.length === 0) {
       spinnerStop();
+      gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
       return Notify.failure(
         'Sorry, there are no movies matching your search query. Please try again.'
       );
@@ -76,6 +78,10 @@ async function fetchMovies() {
     paginationBlock.classList.remove('is-hidden');
   } catch (error) {
     console.log(error);
+    gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
     spinnerStop();
@@ -95,6 +101,10 @@ async function loadMoreSearchingPhotos(event) {
   } catch (err) {
     paginationBlock.classList.add('is-hidden');
     console.log(error);
+    gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
     spinnerStop();
@@ -109,10 +119,14 @@ async function fetchTrendMovies() {
     const { data } = response;
     const { page, results, total_pages, total_results } = data;
 
-    pagination.reset(total_results);     ///Почему отображается всего 50 страниц?
+    pagination.reset(total_results);    
     
     if (results.length === 0) {
       spinnerStop();
+      gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
       return Notify.failure(
         'Trending movies are not available. Please insert the name of the movie.'
       );
@@ -123,6 +137,10 @@ async function fetchTrendMovies() {
     paginationBlock.classList.remove('is-hidden');
   } catch (error) {
     console.log(error);
+    gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
     spinnerStop();
@@ -142,14 +160,13 @@ async function loadMoreTrendingMovies(event) {
     gallery.innerHTML = markUp;
   } catch (err) {
     paginationBlock.classList.add('is-hidden');
+    gallery.innerHTML = `<li>
+      <p class="empty__notify">where is everyone?</p>
+      <img src="${empty}" alt="The list is empty." />
+    </li>`;
     console.log(err);
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
     spinnerStop();
   }
 }
-
-// function onPlayTrailer(event) {
-//   const moviesId = event.target.closest('[data-modal]').id;
-//   findMovieTrailer(moviesId);
-// }
