@@ -31,7 +31,6 @@ export function createMainMarkup(results, { data }) {
  }     
 
  export function createGalleryMarkup(data) {
-  const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`; ///////////
 
   const galleryMarkUp = data.map((item) => {
     const {genres, poster_path, release_date, title, vote_average, id } = item;

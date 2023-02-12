@@ -31,17 +31,16 @@ const onBtnClick = async function (event, storageKey) {
     localStorageService.save(storageKey, queueMovie);  
 
     if (document.title === 'My Library') {
-        console.log(queueMovie);
+
         if (queueMovie.length === 0) {
-            refs.movieList.innerHTML = `
-            <li>
+            refs.movieList.innerHTML = `<li>
               <p class="empty__notify">where is everyone?</p>
-              <img src="${empty}" alt="The list is empty." />
+              <img src="${empty}" alt="The list is empty."/>
             </li>`;
           return;
         }
       const galeryMarkUp = createGalleryMarkup(queueMovie);
-      refs.movieList.innerHTML = galeryMarkUp;
+      refs.movieList.innerHTML = galeryMarkUp.join('');
     }
 }; 
 

@@ -62,7 +62,7 @@ async function fetchMovies() {
       spinnerStop();
       gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
-      <img src="${empty}" alt="The list is empty." />
+      <img src="${empty}" alt="The list is empty."/>
     </li>`;
       return Notify.failure(
         'Sorry, there are no movies matching your search query. Please try again.'
@@ -80,7 +80,7 @@ async function fetchMovies() {
     console.log(error);
     gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
-      <img src="${empty}" alt="The list is empty." />
+      <img src="${empty}" alt="The list is empty."/>
     </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
@@ -103,7 +103,7 @@ async function loadMoreSearchingPhotos(event) {
     console.log(error);
     gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
-      <img src="${empty}" alt="The list is empty." />
+      <img src="${empty}" alt="The list is empty."/>
     </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
@@ -125,7 +125,7 @@ async function fetchTrendMovies() {
       spinnerStop();
       gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
-      <img src="${empty}" alt="The list is empty." />
+      <img src="${empty}" alt="The list is empty."/>
     </li>`;
       return Notify.failure(
         'Trending movies are not available. Please insert the name of the movie.'
@@ -139,7 +139,7 @@ async function fetchTrendMovies() {
     console.log(error);
     gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
-      <img src="${empty}" alt="The list is empty." />
+      <img src="${empty}" alt="The list is empty."/>
     </li>`;
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
