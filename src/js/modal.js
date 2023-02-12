@@ -5,6 +5,7 @@ import findMovieTrailer from './player';
 import onBtnClick from './modalBtnLogics';
 import { createModalMarkup } from './markUp';
 import 'material-icons/iconfont/material-icons.css';
+import { callCount } from './firebase';
 
 const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
@@ -15,7 +16,7 @@ movies.addEventListener('click', clickList);
 function clickModal(event) {
   if (event.target.nodeName === 'BUTTON') {
     return;
-  };
+  }
 
   if (
     ((!event.target.closest('.movie-modal') ||
@@ -33,9 +34,8 @@ function closeModal() {
   modal.classList.add('is-hidden');
   document.body.style.overflow = 'visible';
   const markupWrapper = document.querySelector('.movie-modal__wrapper');
-  modal.removeAttribute("id");
+  modal.removeAttribute('id');
   markupWrapper.remove();
-  
 }
 
 function clickList(event) {
@@ -65,8 +65,19 @@ async function fetchModalMarkup(id) {
 
     const btnAddToWatched = document.querySelector('.btn_add_watched');
     const btnAddToQueue = document.querySelector('.btn_add_queue');
-    btnAddToWatched.addEventListener('click', (event) => onBtnClick(event, 'WATCHED'));
-    btnAddToQueue.addEventListener('click', (event) => onBtnClick(event, 'QUEUE'));
+
+    if (!callCount) {
+      btnAddToWatched.disabled = true;
+      btnAddToQueue.disabled = true;
+      Notify.warning('Please login or sign up');
+    }
+
+    btnAddToWatched.addEventListener('click', event =>
+      onBtnClick(event, 'WATCHED')
+    );
+    btnAddToQueue.addEventListener('click', event =>
+      onBtnClick(event, 'QUEUE')
+    );
     const playBtn = document.querySelector('.js-playBtn');
     playBtn.addEventListener('click', onPlayTrailer);
   } catch (error) {
