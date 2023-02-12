@@ -1,35 +1,48 @@
 import localStorageService from "./localStorage-service";
 import { ApiService } from "./ApiServise";
+import { createGalleryMarkup } from "./markUp";
+import refs from "./refs";
+import empty from '../images/empty-list.gif';
 
 const onBtnClick = async function (event, storageKey) {
     let text = event.target.textContent;
     const movieId = event.target.dataset.id;
-    const response = await ApiService.getMoviesById(movieId); /// ищем фильм на API
+    const response = await ApiService.getMoviesById(movieId); 
     const movieData = response.data;
 
-    let queueMovie = localStorageService.load(storageKey);  /// запрашиваем что уже есть в сторадже
+    let queueMovie = localStorageService.load(storageKey);  
 
-    if(!queueMovie){                                        /// пушим данные из стореджа в наш массив
+    if(!queueMovie){                                       
         queueMovie = [];
     }
 
-    const tempMovie = queueMovie.find((movie) => {        /// ищем есть ли уже фильм в нашем массиве
+    const tempMovie = queueMovie.find((movie) => {       
         return movie.id == movieData.id;
     });
 
-    if (text.includes('add to') & !tempMovie) {               /// если фильма нет - добавлен в локал
+    if (text.includes('add to') & !tempMovie) {               
                 event.target.textContent = text.replace('add to', 'remove from');
                 queueMovie.push(movieData);
             } else{
-                event.target.textContent = text.replace('remove from', 'add to');  /// если фильм уже добавлен - фильтруем массив и удаляем его
+                event.target.textContent = text.replace('remove from', 'add to');  
                 queueMovie = queueMovie.filter((movie) => movie.id.toString() !== movieId.toString())
             }
 
-    localStorageService.save(storageKey, queueMovie);         /// пушим новые данные на сторедж
+    localStorageService.save(storageKey, queueMovie);  
+
+    if (document.title === 'My Library') {
+        console.log(queueMovie);
+        if (queueMovie.length === 0) {
+            refs.movieList.innerHTML = `
+            <li>
+              <p class="empty__notify">where is everyone?</p>
+              <img src="${empty}" alt="The list is empty." />
+            </li>`;
+          return;
+        }
+      const galeryMarkUp = createGalleryMarkup(queueMovie);
+      refs.movieList.innerHTML = galeryMarkUp;
+    }
 }; 
 
 export default onBtnClick;
-
-
-//     let idList = localStorageService.load(storageKey);
-//     // loadMoviesList(idList);

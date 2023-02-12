@@ -32,3 +32,13 @@
     padding-right: 32px;
   }
 }
+
+.empty__notify {
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 54px;
+  @include font(30px, 500, 35.16px);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+}

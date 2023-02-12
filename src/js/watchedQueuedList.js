@@ -1,19 +1,10 @@
 import { Notify } from 'notiflix';
-import { ApiService } from './ApiServise';
-import { spinnerStart, spinnerStop } from "./spinner";
 import empty from '../images/empty-list.gif';
 // import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
 import { createGalleryMarkup } from './markUp';
 import localStorageService from './localStorage-service';
-
-const refs = {
-    watched: document.querySelector('.button-watched'), 
-    queued: document.querySelector('.button-queued'), 
-    movieList: document.querySelector('.movies'), 
-    paginationBlock: document.querySelector('#pagination'),
-    toTopBtn: document.querySelector('.btn-to-top'),
-}
+import refs from './refs';
 
 window.addEventListener('scroll', onScroll);
 refs.watched.addEventListener('click', onClick);
@@ -45,6 +36,20 @@ function startPage(buttonKey) {
   loadMoviesList(movieList);
 }
 
+function loadMoviesList(list) {
+  if (list.length === 0) {
+      refs.movieList.innerHTML = `
+      <li>
+        <p class="empty__notify">where is everyone?</p>
+        <img src="${empty}" alt="The list is empty." />
+      </li>`;
+    return;
+  }
+const galeryMarkUp = createGalleryMarkup(list);
+refs.movieList.innerHTML = galeryMarkUp.join('');
+  // loadOnePage(currentPage);
+}   
+
 
 // refs.paginationBlock.classList.add('is-hidden');
 
@@ -61,18 +66,7 @@ function startPage(buttonKey) {
 
 
 
-export default function loadMoviesList(list) {
-  if (!list) {
-      refs.movieList.innerHTML = `
-      <li>
-        <img src="${empty}" alt="The list is empty." />
-      </li>`;
-    return;
-  }
-const galeryMarkUp = createGalleryMarkup(list);
-refs.movieList.innerHTML = galeryMarkUp;
-  // loadOnePage(currentPage);
-}   
+
 
 // function loadOnePage(pageNumber) {
 //   for(let i=(pageNumber - 1) * 20 ; i<pageNumber * 20; i+=1) {
