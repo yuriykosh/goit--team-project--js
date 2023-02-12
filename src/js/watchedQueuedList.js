@@ -1,4 +1,3 @@
-import { Notify } from 'notiflix';
 import empty from '../images/empty-list.gif';
 // import { pagination } from './tuiPagination';
 import { onScroll, onToTopBtn } from "./scroll-to-top";
@@ -156,39 +155,6 @@ refs.movieList.innerHTML = galeryMarkUp.join('');
 // } 
 // }
 
-// export default function createMovieMarkup(results) {
-//     return results.map(result => {
-//       const { genre_ids, poster_path, release_date, title, vote_average } = result;
-//       const posterLink = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-//       const releaseYear = release_date.slice(0, 4);
-//       const genresList = data.genres.filter(genre => genre_ids.includes(genre.id))
-//       .map(item => item.name);
-//       const genres = genresList.length > 2 ? [genresList[0], genresList[1], 'Other'].join(', ') : genresList.join(', ');
-//       const defaultImage = "/src/images/mobile-poster-filler.jpeg";
-//       const voteAverage = vote_average.toFixed(1);
-
-//      return `
-//      <li class="movies__item">
-//         <div class="movies__wrapper">
-//           <img
-//             loading="lazy"
-//             class="movies__poster"
-//             src=${posterLink}
-//             onerror=${defaultImage}
-//             alt=${title}
-//           />
-//         </div>
-//         <div class="movies__meta">
-//           <h2 class="movies__title">${title}</h2>
-//           <div class="movies__desc">
-//             <span class="movies__desc-genres">${genres}</span>|
-//             <span class="movies__desc-release-year">${releaseYear}</span>
-//             <span class="movies__vote is-hidden">${voteAverage}</span>
-//           </div>
-//         </div>
-//       </li>`;
-//      })
-//  }     
 
 // async function watchedMovie(id) {
 //     console.log('hello')
