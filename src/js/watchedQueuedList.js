@@ -11,13 +11,19 @@ refs.queued.addEventListener('click', onClick);
 refs.toTopBtn.addEventListener('click', onToTopBtn);
 
 let STORAGE_KEY = '';
+let movieList = []; 
+let totalItems = 0;
+let totalPages = 0;
+
 
 startPage('WATCHED');
 
 function onClick(event) {
+  pagination.off('afterMove', loadMore);
+  refs.paginationBlock.classList.add('is-hidden')
   STORAGE_KEY = event.target.dataset.name;
 
-  let movieList = localStorageService.load(STORAGE_KEY); 
+  movieList = localStorageService.load(STORAGE_KEY); 
   if (STORAGE_KEY === 'WATCHED') {
     refs.watched.classList.add('is-active');
     refs.queued.classList.remove('is-active');
@@ -25,15 +31,6 @@ function onClick(event) {
     refs.queued.classList.add('is-active');
     refs.watched.classList.remove('is-active');
   }
-  loadMoviesList(movieList);
-}
-
-function startPage(buttonKey) {
-  refs.watched.classList.add('is-active');
-  STORAGE_KEY = buttonKey;
-  let movieList = localStorageService.load(STORAGE_KEY); 
-  let totalItems = !movieList ? 0 : movieList.length;
-  let totalPages = Math.ceil(totalItems/20);
 
   if (movieList.length > 20) {
     refs.paginationBlock.classList.remove('is-hidden');
@@ -42,6 +39,29 @@ function startPage(buttonKey) {
     pagination.on('afterMove', loadMore); 
 
     loadOnePage(currentPage, movieList)
+    return;
+  }
+
+  loadMoviesList(movieList);
+}
+
+function startPage(buttonKey) {
+  refs.paginationBlock.classList.add('is-hidden')
+  refs.watched.classList.add('is-active');
+  pagination.off('afterMove', loadMore);
+  STORAGE_KEY = buttonKey;
+  movieList = localStorageService.load(STORAGE_KEY); 
+  totalItems = !movieList ? 0 : movieList.length;
+  totalPages = Math.ceil(totalItems/20);
+
+  if (movieList.length > 20) {
+    refs.paginationBlock.classList.remove('is-hidden');
+    pagination.reset(totalItems);
+    const currentPage = pagination.getCurrentPage();
+    pagination.on('afterMove', loadMore); 
+
+    loadOnePage(currentPage, movieList)
+    return;
   }
   loadMoviesList(movieList);
 }
@@ -57,7 +77,6 @@ function loadMoviesList(list) {
   }
 const galeryMarkUp = createGalleryMarkup(list);
 refs.movieList.innerHTML = galeryMarkUp.join('');
-  // loadOnePage(currentPage);
 }   
 
 function loadOnePage(pageNumber, list) {
@@ -74,110 +93,6 @@ function loadOnePage(pageNumber, list) {
 }
 
 function loadMore(event) {
-
-  // refs.movieList.innerHTML = '';
   const currentPage = event.page;
-  console.log(currentPage);
-
-  // try {
-  //   spinnerStart();
-  //   loadOnePage(currentPage);
-  //   refs.paginationBlock.classList.remove('is-hidden')
-  // } catch (error) {
-  //   refs.paginationBlock.classList.add('is-hidden');
-  //   console.log(error);
-  //   return Notify.failure('Something went wrong. Please try again later.');
-  // } finally {
-  //   spinnerStop();
-  // }
+  loadOnePage(currentPage, movieList);
 }
-
-
-
-// refs.paginationBlock.classList.add('is-hidden');
-
-// let idList = localStorageService.load(STORAGE_KEY);
-
-// let totalItems = !idList ? 0 : idList.length;
-// pagination.reset(totalItems);
-// const currentPage = pagination.getCurrentPage();
-// loadMoviesList(idList);
-
-// pagination.on('afterMove', loadMore);  
-
-
-
-
-
-
-
-
-
-
-// function clearMovieList(){
-//    refs.movieList.innerHTML = ""; 
-//    pagination.movePageTo(1);
-// }
-
-
-
-
-
-// import { Notify } from 'notiflix';
-// import { ApiService } from './ApiServise';
-// const STORAGE_KEY = 'movie';
-// localStorage.setItem(STORAGE_KEY, 520);
-
-// const refs = {
-//     watched: document.querySelector('.button-watched'), 
-//     queued: document.querySelector('.button-queued'), 
-//     movieList: document.querySelector('.movies'), 
-// }
-
-// const userId = 5;
-
-// refs.watched.addEventListener('click', onWatchedClick);
-
-// function onWatchedClick(event) {
-//    if (userId === 5) {
-// clearMovieList();   
-// const markUp = `<li class="movies__item">
-//         <div class="movies__wrapper">
-//           <img loading="lazy" class="movies__poster" src="/mobile-poster-filler.68d38ad9.jpeg" alt="movies__poster">
-//         </div>
-//         <div class="movies__meta">
-//           <h2 class="movies__title">Monster Hunter</h2>
-//           <div class="movies__desc">
-//             <span class="movies__desc-genres">Drama, Action</span>|
-//             <span class="movies__desc-release-year">2020</span>
-//             <span class="movies__vote">8.3</span>
-//           </div>
-//         </div>
-//       </li>`;
-// refs.movieList.insertAdjacentHTML('beforeend', markUp);
-// } 
-// }
-
-
-// async function watchedMovie(id) {
-//     console.log('hello')
-//     try { 
-//         const response = await ApiService.getMoviesById(id);
-//         const { data } = response;
-
-//         console.log(data);
-//         createMarkup(data); 
-
-//     }
-//     catch(error) {
-
-//         console.log(error);
-//         return Notify.failure('Something went wrong. Please try again later.');
-//     }
-// }
-
-//  watchedMovie(505642)
-
-// function clearMovieList(){
-//    refs.movieList.innerHTML = ""; 
-// }
