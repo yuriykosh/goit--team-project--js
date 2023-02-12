@@ -37,7 +37,7 @@ const firebaseApp = initializeApp({
 const auth = getAuth(firebaseApp);
 const STORAGE_KEY = 'login-sign up';
 
-let callCount = JSON.parse(localStorage.getItem(STORAGE_KEY)) || 0;
+export let callCount = JSON.parse(localStorage.getItem(STORAGE_KEY)) || 0;
 showLibraryBtn();
 
 //login
