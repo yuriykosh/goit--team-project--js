@@ -9,14 +9,19 @@
       </a>
 
       <ul class="site-nav">
-        <button class="site-nav-btn site-nav__item" type="button" data-modal-auth-open>
+        <button
+          class="site-nav-btn site-nav__item"
+          type="button"
+          id="login"
+          data-modal-auth-open
+        >
           <p class="site-nav-btn__text">Login</p>
         </button>
 
         <li class="site-nav__item">
           <a href="./index.html" class="site-nav__link is-active">Home</a>
         </li>
-        <li class="site-nav__item">
+        <li class="site-nav__item visually-hidden" id="library">
           <a href="./my-library.html" class="site-nav__link">My library</a>
         </li>
       </ul>
@@ -24,7 +29,13 @@
 
     <form class="form js-form">
       <label class="form__label">
-        <input class="form__input" type="text" name="query" autofocus placeholder="Movie search" />
+        <input
+          class="form__input"
+          type="text"
+          name="query"
+          autofocus
+          placeholder="Movie search"
+        />
       </label>
       <button type="submit" class="form__button">
         <svg class="form__icon" width="12" height="12">
