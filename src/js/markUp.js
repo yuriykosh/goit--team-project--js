@@ -70,7 +70,7 @@ export function createMainMarkup(results, { data }) {
 
  export function createModalMarkup(data) {
   const {genres, poster_path, title, vote_average, id, vote_count, popularity, original_title, overview} = data;
-  let watchedText = '2121,2121,3434,14';
+  let watchedText = '';
   let queueText = '';
   let watchedMovie = [];
   let queueMovie = [];
@@ -80,14 +80,14 @@ export function createMainMarkup(results, { data }) {
   if (!watchedMovie) {
     watchedText = 'add to watched';
   } else {
-    watchedText = !watchedMovie.find(item => Number(item) === id) ? "add to watched" : "remove from watched";
+    watchedText = !watchedMovie.find(item => item.id === id) ? "add to watched" : "remove from watched";
   }
 
    queueMovie = localStorageService.load('QUEUE') ? localStorageService.load('QUEUE') : [];
   if (!queueMovie) {
     queueText = 'add to watched';
   } else {
-    queueText = !queueMovie.find(item => Number(item) === id) ? "add to queue" : "remove from queue";
+    queueText = !queueMovie.find(item => item.id === id) ? "add to queue" : "remove from queue";
   }
 
   const defaultImage = `https://raw.githubusercontent.com/yuriykosh/goit--team-project--js/main/src/images/main-home/poster-filler-desktop.jpeg`;
