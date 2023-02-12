@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix';
 import { ApiService } from './ApiServise';
-import createMarkup from './markUp';
+import { createMainMarkup } from './markUp';
 import { spinnerStart, spinnerStop } from './spinner';
 import { pagination } from './tuiPagination';
 // import findMovieTrailer from './player';
@@ -71,7 +71,7 @@ async function fetchMovies() {
       Notify.success(`Hooray! We found ${total_results} movies.`);
     }
 
-    const markUp = createMarkup(results, genresList).join('');
+    const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
     paginationBlock.classList.remove('is-hidden');
   } catch (error) {
@@ -90,7 +90,7 @@ async function loadMoreSearchingPhotos(event) {
     const genresList = await ApiService.getGenresList();
     const { data } = response;
     const { page, results, total_pages, total_results } = data;
-    const markUp = createMarkup(results, genresList).join('');
+    const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
   } catch (err) {
     paginationBlock.classList.add('is-hidden');
@@ -118,7 +118,7 @@ async function fetchTrendMovies() {
       );
     }
 
-    const markUp = createMarkup(results, genresList).join('');
+    const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
     paginationBlock.classList.remove('is-hidden');
   } catch (error) {
@@ -138,7 +138,7 @@ async function loadMoreTrendingMovies(event) {
     const genresList = await ApiService.getGenresList();
     const { data } = response;
     const { page, results, total_pages, total_results } = data;
-    const markUp = createMarkup(results, genresList).join('');
+    const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
   } catch (err) {
     paginationBlock.classList.add('is-hidden');

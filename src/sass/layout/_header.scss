@@ -316,7 +316,14 @@
     cursor: pointer;
   }
 
-  &:hover {
+  &:focus {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    cursor: pointer;
+  }
+
+  &.is-active {
+    border-color: var(--accent);
     background-color: var(--accent);
     cursor: pointer;
   }
