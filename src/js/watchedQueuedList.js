@@ -21,6 +21,7 @@ refs.paginationBlock.classList.add('is-hidden');
 
 let STORAGE_KEY = 'WATCHED';
 let idList = localStorageService.load(STORAGE_KEY);
+
 let totalItems = !idList ? 0 : idList.length;
 pagination.reset(totalItems);
 const currentPage = pagination.getCurrentPage();
@@ -82,6 +83,7 @@ async function findMovieById(id) {
 
 function clearMovieList(){
    refs.movieList.innerHTML = ""; 
+   pagination.movePageTo(1);
 }
 
 function loadMore(event) {
