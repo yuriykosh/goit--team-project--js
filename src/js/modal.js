@@ -10,7 +10,7 @@ import { callCount } from './firebase';
 const modal = document.querySelector('[data-modal]');
 const movies = document.querySelector('.movies');
 const wrapper = document.querySelector('.movie-modal');
-
+const player = document.querySelector('.player');
 movies.addEventListener('click', clickList);
 
 function clickModal(event) {
@@ -24,6 +24,7 @@ function clickModal(event) {
       !event.keyCode) ||
     event.keyCode === 27
   ) {
+    console.log('closeModal');
     closeModal();
     document.removeEventListener('keydown', clickModal);
     modal.removeEventListener('click', clickModal);
@@ -78,6 +79,7 @@ async function fetchModalMarkup(id) {
     btnAddToQueue.addEventListener('click', event =>
       onBtnClick(event, 'QUEUE')
     );
+
     const playBtn = document.querySelector('.js-playBtn');
     playBtn.addEventListener('click', onPlayTrailer);
   } catch (error) {
@@ -90,5 +92,6 @@ async function fetchModalMarkup(id) {
 
 function onPlayTrailer(event) {
   const moviesId = event.target.closest('[data-modal]').id;
+  player.classList.remove('is-hidden');
   findMovieTrailer(moviesId);
 }

@@ -93,6 +93,7 @@ function loadOnePage(pageNumber, list) {
 }
 
 function loadMore(event) {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   const currentPage = event.page;
   loadOnePage(currentPage, movieList);
 }
