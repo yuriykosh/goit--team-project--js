@@ -54,7 +54,7 @@ async function fetchMovies() {
     const response = await ApiService.getMoviesByName(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results, total_results } = data;
 
     pagination.reset(total_results);
 
@@ -89,16 +89,17 @@ async function fetchMovies() {
 }
 
 async function loadMoreSearchingPhotos(event) {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   const currentPage = event.page;
   try {
     spinnerStart();
     const response = await ApiService.getMoviesByName(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results } = data;
     const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
-  } catch (err) {
+  } catch (error) {
     paginationBlock.classList.add('is-hidden');
     console.log(error);
     gallery.innerHTML = `<li>
@@ -117,7 +118,7 @@ async function fetchTrendMovies() {
     const response = await ApiService.getTrendMovies(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results, total_results } = data;
 
     pagination.reset(total_results);    
     
@@ -148,6 +149,7 @@ async function fetchTrendMovies() {
 }
 
 async function loadMoreTrendingMovies(event) {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   const currentsPage = event.page;
 
   try {
@@ -155,16 +157,16 @@ async function loadMoreTrendingMovies(event) {
     const response = await ApiService.getTrendMovies(currentsPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results } = data;
     const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
-  } catch (err) {
+  } catch (error) {
     paginationBlock.classList.add('is-hidden');
     gallery.innerHTML = `<li>
       <p class="empty__notify">where is everyone?</p>
       <img src="${empty}" alt="The list is empty." />
     </li>`;
-    console.log(err);
+    console.log(error);
     return Notify.failure('Something went wrong. Please try again later.');
   } finally {
     spinnerStop();
