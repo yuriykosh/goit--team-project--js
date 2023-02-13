@@ -54,7 +54,7 @@ async function fetchMovies() {
     const response = await ApiService.getMoviesByName(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results, total_results } = data;
 
     pagination.reset(total_results);
 
@@ -95,7 +95,7 @@ async function loadMoreSearchingPhotos(event) {
     const response = await ApiService.getMoviesByName(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results } = data;
     const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
   } catch (err) {
@@ -117,7 +117,7 @@ async function fetchTrendMovies() {
     const response = await ApiService.getTrendMovies(currentPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results, total_results } = data;
 
     pagination.reset(total_results);    
     
@@ -155,7 +155,7 @@ async function loadMoreTrendingMovies(event) {
     const response = await ApiService.getTrendMovies(currentsPage);
     const genresList = await ApiService.getGenresList();
     const { data } = response;
-    const { page, results, total_pages, total_results } = data;
+    const { results} = data;
     const markUp = createMainMarkup(results, genresList).join('');
     gallery.innerHTML = markUp;
   } catch (err) {
