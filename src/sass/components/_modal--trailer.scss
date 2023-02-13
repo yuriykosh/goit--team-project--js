@@ -1,20 +1,27 @@
-.player__frame {
+.player {
+    position: relative;
     z-index: 100001;
-    position: absolute;
     top: 200px;
     left: 50%;
-    min-width: 240px;
-    min-height: 150px;
     transform: translate(-50%, -50%);
+    padding-bottom: calc(56.25% * 0.75); /* 16:9 */
+    width: 75%;
+    height: 0;
 
     @media screen and (min-width: 768px) {
         top: 50%;
-        min-width: 640px;
-        min-height: 360px;
-    }
-    @media screen and (min-width: 1280px) {
-        min-width: 806px;
-        min-height: 410px;
     }
 
+    @media screen and (min-width: 1280px) {
+        width: 50%;
+        padding-bottom: calc(56.25% * 0.5); /* 16:9 */
+    }
+
+}
+.player__frame  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

@@ -4,8 +4,6 @@ import { Notify } from 'notiflix';
 const player = document.querySelector('.player');
 const modal = document.querySelector('[data-modal]');
 
-modal.addEventListener('click', onClose);
-
 export default async function findMovieTrailer(id) {
   try {
     const response = await ApiService.getMovieTreiler(id);
@@ -14,10 +12,11 @@ export default async function findMovieTrailer(id) {
     const videoKey = data.results.find(
       result => result.type === 'Trailer' && result.official
     ).key;
-
+    
     createPlayer(videoKey);
 
-    window.addEventListener('keydown', onEscPress);
+    document.addEventListener('keydown', onEscPress);
+    modal.addEventListener('click', onClose);
   } catch (error) {
     console.log(error);
     return Notify.failure('Sorry, there no trailer to this film!');
@@ -25,6 +24,8 @@ export default async function findMovieTrailer(id) {
 }
 
 function createPlayer(id) {
+  console.log('createPlayer');
+  player.classList.remove('is-hidden');
   const frame = `<iframe class="player__frame" id="player" type="text/html"
     src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
   allowfullscreen></iframe>`;
@@ -32,15 +33,19 @@ function createPlayer(id) {
 }
 
 function onEscPress(e) {
+  console.log('onEscPress');
   if (e.key !== 'Escape') {
     return;
   }
   player.innerHTML = '';
-  window.removeEventListener('keydown', onEscPress);
+  player.classList.add('is-hidden');
+  document.removeEventListener('keydown', onEscPress);
 }
 
 function onClose(e) {
   if (e.target !== player) {
+    player.classList.add('is-hidden');
     player.innerHTML = '';
   }
+  modal.removeEventListener('click', onClose);
 }
